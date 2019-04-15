@@ -10,6 +10,7 @@
 #include <string>
 
 using namespace std;
+
 class LinkedList {
 private:
     typedef struct Node {

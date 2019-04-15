@@ -4,7 +4,9 @@
 
 #ifndef ALGORITHM_LINKEDLISTSTACK_H
 #define ALGORITHM_LINKEDLISTSTACK_H
+
 #include <cstring>
+#include <assert.h>
 
 class LinkedListStack {
 

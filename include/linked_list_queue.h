@@ -7,6 +7,8 @@
 
 #include <cstring>
 #include <assert.h>
+#include <string>
+using namespace std;
 
 class LinkedListQueue {
 
