@@ -6,7 +6,7 @@
 #ifndef ALGORITHM_CIRCULARQUEUE_H
 #define ALGORITHM_CIRCULARQUEUE_H
 
-#include <malloc.h>
+#include <stdlib.h>
 #include <cstring>
 #include <assert.h>
 
