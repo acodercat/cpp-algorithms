@@ -14,7 +14,6 @@ private:
     typedef struct Node {
         int v;
         Node *next;
-
     } Node;
 
     Node *top = NULL;

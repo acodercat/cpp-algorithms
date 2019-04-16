@@ -10,5 +10,6 @@ add_executable(circular_queue src/demo/circular_queue.cpp)
 add_executable(linked_list_queue src/demo/linked_list_queue.cpp)
 add_executable(linked_list_stack src/demo/linked_list_stack.cpp)
 add_executable(stack src/demo/stack.cpp)
+add_executable(trie_tree src/demo/trie_tree.cpp)
 
 
