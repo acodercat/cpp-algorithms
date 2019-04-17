@@ -44,7 +44,6 @@ public:
 
         this->head = dummyNode->next;
 
-
     }
 
     void insert(int v) {
