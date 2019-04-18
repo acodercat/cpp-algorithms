@@ -16,7 +16,6 @@ private:
     typedef struct Node {
         int v;
         Node *next;
-        Node *prev;
     } Node;
     Node *head = NULL;
     unsigned int size = 0;
@@ -50,9 +49,6 @@ public:
         Node *node = new Node();
         node->v = v;
         node->next = this->head;
-        if (NULL != this->head) {
-            this->head->prev = node;
-        }
         this->head = node;
         this->size ++;
     }
