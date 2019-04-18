@@ -11,5 +11,7 @@ add_executable(linked_list_queue src/demo/linked_list_queue.cpp)
 add_executable(linked_list_stack src/demo/linked_list_stack.cpp)
 add_executable(stack src/demo/stack.cpp)
 add_executable(trie_tree src/demo/trie_tree.cpp)
+add_executable(circular_linked_list src/demo/circular_linked_list.cpp)
+add_executable(binary_search_tree src/demo/binary_search_tree.cpp)
 
 
