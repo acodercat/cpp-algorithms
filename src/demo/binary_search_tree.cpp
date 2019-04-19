@@ -7,10 +7,13 @@
 
 int main() {
     BinarySearchTree *binarySearchTree = new BinarySearchTree();
-    binarySearchTree->add(56);
-    binarySearchTree->add(57);
-    binarySearchTree->add(59);
-    binarySearchTree->add(53);
-    cout<<binarySearchTree->contains(531)<<endl;
-    binarySearchTree->test();
+    binarySearchTree->add(1);
+    binarySearchTree->add(2);
+    binarySearchTree->add(5);
+    binarySearchTree->add(6);
+    binarySearchTree->add(4);
+    cout<<binarySearchTree->contains(53)<<endl;
+    binarySearchTree->preOrderTraverse();
+    binarySearchTree->inOrderTraverse();
+    binarySearchTree->postOrderTraverse();
 }

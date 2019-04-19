@@ -22,9 +22,8 @@ private:
     unsigned int size = 0;
     Node * add(Node *rootNode, int v) {
         if (NULL == rootNode) {
-            rootNode = new Node(v);
             this->size ++;
-            return rootNode;
+            return new Node(v);
         } else {
             if (v < rootNode->v) {
                 rootNode->leftNode = this->add(rootNode->leftNode, v);
@@ -35,18 +34,45 @@ private:
         return rootNode;
     }
 
-    bool contains(Node *rootNode, int v) {
-        if (NULL == rootNode) {
+    bool contains(Node *node, int v) {
+        if (NULL == node) {
             return false;
         }
 
-        if (v == rootNode->v) {
+        if (v == node->v) {
             return true;
-        } else if (v < rootNode->v) {
-            return this->contains(rootNode->leftNode, v);
+        } else if (v < node->v) {
+            return this->contains(node->leftNode, v);
         } else {
-            return this->contains(rootNode->rightNode, v);
+            return this->contains(node->rightNode, v);
         }
+    }
+
+    void preOrderTraverse(Node *node) {
+        if (NULL == node) {
+            return;
+        }
+        cout<<node->v<<" ";
+        this->preOrderTraverse(node->leftNode);
+        this->preOrderTraverse(node->rightNode);
+    }
+
+    void inOrderTraverse(Node *node) {
+        if (NULL == node) {
+            return;
+        }
+        this->inOrderTraverse(node->leftNode);
+        cout<<node->v<<" ";
+        this->inOrderTraverse(node->rightNode);
+    }
+
+    void postOrderTraverse(Node *node) {
+        if (NULL == node) {
+            return;
+        }
+        this->postOrderTraverse(node->leftNode);
+        this->postOrderTraverse(node->rightNode);
+        cout<<node->v<<" ";
     }
 
 public:
@@ -59,8 +85,22 @@ public:
         return this->size;
     }
 
-    void add(int v) {
+    void preOrderTraverse() {
+        this->preOrderTraverse(this->rootNode);
+        cout<<endl;
+    }
 
+    void inOrderTraverse() {
+        this->inOrderTraverse(this->rootNode);
+        cout<<endl;
+    }
+
+    void postOrderTraverse() {
+        this->postOrderTraverse(this->rootNode);
+        cout<<endl;
+    }
+
+    void add(int v) {
         this->rootNode = this->add(this->rootNode, v);
     }
 
@@ -72,9 +112,6 @@ public:
         return this->contains(this->rootNode, v);
     }
 
-    void test() {
-        cout<<this->rootNode->leftNode->v<<endl;
-    }
 };
 
 
