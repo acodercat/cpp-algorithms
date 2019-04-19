@@ -5,6 +5,7 @@
 #ifndef CPP_ALGORITHMS_BINARY_SEARCH_TREE_H
 #define CPP_ALGORITHMS_BINARY_SEARCH_TREE_H
 
+#include <stack>
 using namespace std;
 
 class BinarySearchTree {
@@ -48,15 +49,6 @@ private:
         }
     }
 
-    void preOrderTraverse(Node *node) {
-        if (NULL == node) {
-            return;
-        }
-        cout<<node->v<<" ";
-        this->preOrderTraverse(node->leftNode);
-        this->preOrderTraverse(node->rightNode);
-    }
-
     void inOrderTraverse(Node *node) {
         if (NULL == node) {
             return;
@@ -86,7 +78,21 @@ public:
     }
 
     void preOrderTraverse() {
-        this->preOrderTraverse(this->rootNode);
+        stack<Node *> nodeStack;
+        nodeStack.push(this->rootNode);
+        while( !nodeStack.empty()) {
+            Node *currentNode = nodeStack.top();
+            cout<<currentNode->v<<" ";
+            nodeStack.pop();
+
+            if (currentNode->rightNode != NULL) {
+                nodeStack.push(currentNode->rightNode);
+            }
+
+            if (currentNode->leftNode != NULL) {
+                nodeStack.push(currentNode->leftNode);
+            }
+        }
         cout<<endl;
     }
 
