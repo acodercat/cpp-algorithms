@@ -8,33 +8,33 @@
 #ifndef ALGORITHM_STACK_H
 #define ALGORITHM_STACK_H
 
-
+template<typename T>
 class Stack {
 
 private:
     unsigned int capacity = 0;
     unsigned int size = 0;
-    int *arr;
+    T *container;
 
 public:
     Stack(unsigned int capacity) {
         assert(capacity > 0);
         this->capacity = capacity;
-        this->arr = (int *)malloc(capacity * sizeof(int));
-        memset(this->arr, 0, capacity * sizeof(int));
+        this->container = (T *)malloc(capacity * sizeof(T));
+        memset(this->container, 0, capacity * sizeof(T));
     }
 
-    int pop() {
+    T pop() {
         assert(!this->isEmpty());
-        int top = this->arr[this->getSize() - 1];
+        T top = this->container[this->getSize() - 1];
         this->size--;
         return top;
 
     }
 
-    void push(int v) {
+    void push(T v) {
         assert(!this->isFull());
-        this->arr[this->getSize()] = v;
+        this->container[this->getSize()] = v;
         this->size++;
     }
 
@@ -51,7 +51,7 @@ public:
     }
 
     ~Stack() {
-        free(this->arr);
+        free(this->container);
     }
 };
 
