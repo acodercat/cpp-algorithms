@@ -177,13 +177,13 @@ public:
             if ( NULL == node->leftNode ) {
                 Node *rightNode = node->rightNode;
                 delete node;
-                return rightNode;
                 this->size --;
+                return rightNode;
             }else if ( NULL == node->rightNode ) {
                 Node *leftNode = node->leftNode;
                 delete node;
-                return leftNode;
                 this->size --;
+                return leftNode;
             } else {
 
                 Node *rightMinNode = this->minNode(node->rightNode);
