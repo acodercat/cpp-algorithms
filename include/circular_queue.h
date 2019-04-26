@@ -10,11 +10,12 @@
 #include <cstring>
 #include <assert.h>
 
+template<typename T>
 class CircularQueue {
 private:
     unsigned int capacity = 0;
     unsigned int size = 0;
-    int *arr = NULL;
+    T *arr = NULL;
     int frontIndex = 0;
     int tailIndex = 0;
 
@@ -28,21 +29,20 @@ public:
         this->capacity = capacity;
         this->frontIndex = 0;
         this->tailIndex = 0;
-        this->arr = (int *)malloc(capacity * sizeof(int));
-        memset(this->arr, 0, capacity * sizeof(int));
+        this->arr = (T *)malloc(capacity * sizeof(T));
+        memset(this->arr, 0, capacity * sizeof(T));
     }
 
-    void enqueue(int v) {
+    void enqueue(T v) {
         assert(!this->isFull());
         this->arr[this->tailIndex] = v;
         this->tailIndex = this->getNextIndex(this->tailIndex);
-
         this->size ++;
     }
 
-    int dequeue() {
+    T dequeue() {
         assert(!this->isEmpty());
-        int front = this->arr[this->frontIndex];
+        T front = this->arr[this->frontIndex];
         this->frontIndex = this->getNextIndex(this->frontIndex);
         this->size --;
         return front;

@@ -24,12 +24,16 @@ public:
         memset(this->container, 0, capacity * sizeof(T));
     }
 
-    T pop() {
+    void pop() {
         assert(!this->isEmpty());
         T top = this->container[this->getSize() - 1];
         this->size--;
-        return top;
+    }
 
+    T top() {
+        assert(!this->isEmpty());
+        T top = this->container[this->getSize() - 1];
+        return top;
     }
 
     void push(T v) {

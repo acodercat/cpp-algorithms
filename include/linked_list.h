@@ -11,10 +11,11 @@
 
 using namespace std;
 
+template<typename T>
 class LinkedList {
 private:
     typedef struct Node {
-        int v;
+        T v;
         Node *next;
     } Node;
     Node *head = NULL;
@@ -45,7 +46,7 @@ public:
 
     }
 
-    void insert(int v) {
+    void insert(T v) {
         Node *node = new Node();
         node->v = v;
         node->next = this->head;

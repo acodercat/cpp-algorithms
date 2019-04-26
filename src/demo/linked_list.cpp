@@ -7,11 +7,11 @@
 #include "linked_list.h"
 
 int main() {
-    LinkedList *linkedList = new LinkedList();
-    linkedList->insert(3);
-    linkedList->insert(31);
-    linkedList->insert(18);
-    linkedList->remove(18);
-    linkedList->insert(28);
-    std::cout << linkedList->toString() << std::endl;
+    LinkedList<int> linkedList;
+    linkedList.insert(3);
+    linkedList.insert(31);
+    linkedList.insert(18);
+    linkedList.remove(18);
+    linkedList.insert(28);
+    std::cout << linkedList.toString() << std::endl;
 }

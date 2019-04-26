@@ -11,7 +11,9 @@ int main() {
     stack.push(6);
     stack.push(7);
     stack.push(8);
-    std::cout << stack.pop() << std::endl;
-    std::cout << stack.pop() << std::endl;
-    std::cout << stack.pop() << std::endl;
+    std::cout << stack.top() << std::endl;
+    stack.pop();
+    std::cout << stack.top() << std::endl;
+    stack.pop();
+    std::cout << stack.top() << std::endl;
 }
