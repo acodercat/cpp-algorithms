@@ -26,8 +26,8 @@ int main() {
     binarySearchTree->levelOrderTraverse();
     cout<<"min:"<<binarySearchTree->min()<<endl;
     cout<<"max:"<<binarySearchTree->max()<<endl;
-//    cout<<"remove min :"<<binarySearchTree->removeMin()<<endl;
-//    cout<<"remove max :"<<binarySearchTree->removeMax()<<endl;
+    cout<<"remove min :"<<binarySearchTree->removeMin()<<endl;
+    cout<<"remove max :"<<binarySearchTree->removeMax()<<endl;
     cout<<"remove 99 "<<endl;
     binarySearchTree->remove(99);
     binarySearchTree->levelOrderTraverse();

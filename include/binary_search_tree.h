@@ -79,6 +79,7 @@ private:
         if (NULL == node) {
             return NULL;
         }
+
         if (NULL == node->leftNode) {
             Node *rightNode = node->rightNode;
             delete node;
@@ -86,7 +87,7 @@ private:
             return rightNode;
         }
 
-        node->leftNode = this->removeMin(node);
+        node->leftNode = this->removeMin(node->leftNode);
         return node;
     }
 
