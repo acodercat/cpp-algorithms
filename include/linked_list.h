@@ -43,7 +43,6 @@ public:
         }
 
         this->head = dummyNode->next;
-
     }
 
     void insert(T v) {

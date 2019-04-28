@@ -14,13 +14,13 @@ using namespace std;
  *
  *
  * */
-
+template<typename T>
 class BinarySearchTree {
 private:
     typedef struct Node {
-        int v;
+        T v;
         Node *leftNode = NULL, *rightNode = NULL;
-        Node(int v) {
+        Node(T v) {
             this->leftNode = NULL;
             this->rightNode = NULL;
             this->v = v;
@@ -28,21 +28,21 @@ private:
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node * add(Node *rootNode, int v) {
+    Node * add(Node *rootNode, T v) {
         if (NULL == rootNode) {
             this->size ++;
             return new Node(v);
         } else {
             if (v < rootNode->v) {
                 rootNode->leftNode = this->add(rootNode->leftNode, v);
-            } else {
+            } else if (v > rootNode->v) {
                 rootNode->rightNode = this->add(rootNode->rightNode, v);
             }
         }
         return rootNode;
     }
 
-    bool contains(Node *node, int v) {
+    bool contains(Node *node, T v) {
         if (NULL == node) {
             return false;
         }
@@ -82,8 +82,9 @@ private:
 
         if (NULL == node->leftNode) {
             Node *rightNode = node->rightNode;
-            delete node;
             this->size --;
+            node = NULL;
+            delete node;
             return rightNode;
         }
 
@@ -121,7 +122,7 @@ public:
         cout<<endl;
     }
 
-    int min() {
+    T min() {
         assert(!this->isEmpty());
         Node *currentNode = this->rootNode;
         while(currentNode->leftNode != NULL) {
@@ -140,14 +141,14 @@ public:
         return currentNode;
     }
 
-    int removeMin() {
+    T removeMin() {
         assert(!this->isEmpty());
-        int min = this->min();
+        T min = this->min();
         this->rootNode = this->removeMin(this->rootNode);
         return min;
     }
 
-    Node *find(int v) {
+    Node *find(T v) {
         Node *currentNode = this->rootNode;
         while( currentNode != NULL ) {
             if ( v == currentNode->v ) {
@@ -163,7 +164,7 @@ public:
     }
 
 
-    Node *remove(Node *node, int v) {
+    Node *remove(Node *node, T v) {
         if( node == NULL ) {
             return NULL;
         }
@@ -176,26 +177,30 @@ public:
         } else {
             if ( NULL == node->leftNode ) {
                 Node *rightNode = node->rightNode;
-                delete node;
                 this->size --;
+                node = NULL;
+                delete node;
                 return rightNode;
             }else if ( NULL == node->rightNode ) {
                 Node *leftNode = node->leftNode;
-                delete node;
                 this->size --;
+                node = NULL;
+                delete node;
                 return leftNode;
             } else {
 
                 Node *rightMinNode = this->minNode(node->rightNode);
                 rightMinNode->rightNode = this->removeMin(node->rightNode);
                 rightMinNode->leftNode = node->leftNode;
+                node = NULL;
+                delete node;
                 return rightMinNode;
             }
 
         }
     }
 
-    void remove(int v) {
+    void remove(T v) {
         assert(!this->isEmpty());
         this->rootNode = this->remove(this->rootNode, v);
         return;
@@ -204,9 +209,9 @@ public:
     /*
      * 使用stack来实现删除最大节点,因为stack先进后出的特性可以记录最大节点的父节点
      */
-    int removeMax() {
+    T removeMax() {
         assert(!this->isEmpty());
-        int max = this->max();
+        T max = this->max();
         Stack<Node *> nodeStack(this->getSize());
         nodeStack.push(this->rootNode);
         while( nodeStack.top()->rightNode != NULL ) {
@@ -221,12 +226,13 @@ public:
             Node *parentNode = nodeStack.top();
             parentNode->rightNode = maxNode->leftNode;
         }
-        delete maxNode;
         this->size --;
+        maxNode = NULL;
+        delete maxNode;
         return max;
     }
 
-    int max() {
+    T max() {
         assert(!this->isEmpty());
         Node *currentNode = this->rootNode;
         while(currentNode->rightNode != NULL) {
@@ -271,7 +277,7 @@ public:
         cout<<endl;
     }
 
-    void add(int v) {
+    void add(T v) {
         this->rootNode = this->add(this->rootNode, v);
     }
 
@@ -279,7 +285,7 @@ public:
         return 0 == this->getSize();
     }
 
-    bool contains(int v) {
+    bool contains(T v) {
         return this->contains(this->rootNode, v);
     }
 

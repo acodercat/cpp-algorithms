@@ -42,7 +42,7 @@ private:
             this->childNodeNum ++;
         }
     private:
-        // soft array
+        // flexible array
         Node *childNodes[1];
 
     } Node;
