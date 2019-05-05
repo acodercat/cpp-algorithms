@@ -36,6 +36,7 @@ public:
             if (prevNode->next->v == v) {
                 Node *delNode = prevNode->next;
                 prevNode->next = prevNode->next->next;
+                this->size --;
                 delete delNode;
             } else {
                 prevNode = prevNode->next;
