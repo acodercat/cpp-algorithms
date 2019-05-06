@@ -174,6 +174,7 @@ public:
             return node;
         } else if (v > node->v) {
             node->rightNode = this->remove(node->rightNode, v);
+            return node;
         } else {
             if ( NULL == node->leftNode ) {
                 Node *rightNode = node->rightNode;
@@ -181,14 +182,13 @@ public:
                 node = NULL;
                 delete node;
                 return rightNode;
-            }else if ( NULL == node->rightNode ) {
+            } else if ( NULL == node->rightNode ) {
                 Node *leftNode = node->leftNode;
                 this->size --;
                 node = NULL;
                 delete node;
                 return leftNode;
             } else {
-
                 Node *rightMinNode = this->minNode(node->rightNode);
                 rightMinNode->rightNode = this->removeMin(node->rightNode);
                 rightMinNode->leftNode = node->leftNode;
