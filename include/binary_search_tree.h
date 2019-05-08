@@ -20,6 +20,11 @@ private:
     typedef struct Node {
         T v;
         Node *leftNode = NULL, *rightNode = NULL;
+        Node(T v) {
+            this->leftNode = NULL;
+            this->rightNode = NULL;
+            this->v = v;
+        }
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;

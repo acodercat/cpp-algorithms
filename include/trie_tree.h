@@ -18,7 +18,6 @@ private:
         int v;
         char c;
         bool isKey;
-        Node *next = NULL;
         short int childNodeNum = 0;
         Node(char c) {
             this->c = c;
