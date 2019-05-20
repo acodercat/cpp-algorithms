@@ -11,6 +11,7 @@ private:
     int *parents;
     // 记录每个根节点所在树的深度
     int *ranks;
+
 public:
     UnionFind(unsigned int size) {
         this->size = size;
@@ -23,14 +24,31 @@ public:
     }
 
     int find(int element) {
-        if ( this->parents[element] == element ) {
-            return element;
+        int parent = parents[element];
+        if (parent == element) {
+            return parent;
         }
-        return this->find(this->parents[element]);
+        // pathCompression
+        parents[element] = parents[parent];
+        return this->find(parents[element]);
     }
+
+//    int find(int element) {
+//        int parent = parents[element];
+//        if (parent == element) {
+//            return parent;
+//        }
+//        // pathCompression
+//        parents[element] = this->find(parents[element]);
+//        return parents[element];
+//    }
 
     bool isConnected(int p ,int q) {
         return this->find(p) == this->find(q);
+    }
+
+    unsigned int getSize() {
+        return this->size;
     }
 
     void unionElement(int p, int q) {
