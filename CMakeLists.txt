@@ -14,6 +14,7 @@ add_executable(trie_tree src/demo/trie_tree.cpp)
 add_executable(circular_linked_list src/demo/circular_linked_list.cpp)
 add_executable(binary_search_tree src/demo/binary_search_tree.cpp)
 add_executable(segment_tree src/demo/segment_tree.cpp)
-add_executable(union_find src/demo/union_find.cpp include/union_find.h)
+add_executable(union_find src/demo/union_find.cpp)
+add_executable(avl_tree src/demo/avl_tree.cpp)
 
 
