@@ -44,7 +44,7 @@ private:
         unsigned int balanceFctor = this->getNodeBalanceFctor(rootNode);
         cout<<balanceFctor<<endl;
         if (balanceFctor > 1) {
-
+            cout<<"error"<<endl;
         }
         return rootNode;
     }
