@@ -62,7 +62,7 @@ public:
         int qRank = this->ranks[qRoot];
 
         // 把深度低的树的根节点指向深度高的树的根节点,保证树的平衡,避免退化成链表.
-        if ( qRank < qRank ) {
+        if ( pRank > qRank ) {
             this->parents[qRoot] = pRoot;
         } else if ( pRank < qRank ) {
             this->parents[pRoot] = qRoot;

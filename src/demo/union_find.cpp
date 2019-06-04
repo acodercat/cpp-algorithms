@@ -10,7 +10,7 @@ int main() {
     UnionFind *unionFind = new UnionFind(5);
     unionFind->unionElement(1, 2);
     unionFind->unionElement(1, 4);
-//    unionFind->unionElement(5, 2);
+    unionFind->unionElement(5, 2);
 
     unionFind->unionElement(3, 4);
 
