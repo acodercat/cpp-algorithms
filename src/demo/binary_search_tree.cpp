@@ -7,18 +7,18 @@
 
 int main() {
     BinarySearchTree<int> binarySearchTree;
-    binarySearchTree.add(5);
-    binarySearchTree.add(6);
-    binarySearchTree.add(16);
-    binarySearchTree.add(1);
-    binarySearchTree.add(2);
-    binarySearchTree.add(4);
-    binarySearchTree.add(64);
-    binarySearchTree.add(88);
-    binarySearchTree.add(99);
-    binarySearchTree.add(100);
-    binarySearchTree.add(96);
-    binarySearchTree.add(98);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(16);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(64);
+    binarySearchTree.insert(88);
+    binarySearchTree.insert(99);
+    binarySearchTree.insert(100);
+    binarySearchTree.insert(96);
+    binarySearchTree.insert(98);
     cout<<binarySearchTree.contains(53)<<endl;
     binarySearchTree.preOrderTraverse();
     binarySearchTree.inOrderTraverse();

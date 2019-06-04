@@ -16,5 +16,3 @@ add_executable(binary_search_tree src/demo/binary_search_tree.cpp)
 add_executable(segment_tree src/demo/segment_tree.cpp)
 add_executable(union_find src/demo/union_find.cpp)
 add_executable(avl_tree src/demo/avl_tree.cpp)
-
-

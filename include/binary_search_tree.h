@@ -6,6 +6,7 @@
 #define CPP_ALGORITHMS_BINARY_SEARCH_TREE_H
 
 #include "stack.h"
+#include <assert.h>
 #include "circular_queue.h"
 using namespace std;
 /*
@@ -28,15 +29,15 @@ private:
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node * add(Node *rootNode, T v) {
+    Node * insert(Node *rootNode, T v) {
         if (NULL == rootNode) {
             this->size ++;
             return new Node(v);
         } else {
             if (v < rootNode->v) {
-                rootNode->leftNode = this->add(rootNode->leftNode, v);
+                rootNode->leftNode = this->insert(rootNode->leftNode, v);
             } else if (v > rootNode->v) {
-                rootNode->rightNode = this->add(rootNode->rightNode, v);
+                rootNode->rightNode = this->insert(rootNode->rightNode, v);
             }
         }
         return rootNode;
@@ -189,12 +190,14 @@ public:
                 delete node;
                 return leftNode;
             } else {
-                Node *rightMinNode = this->minNode(node->rightNode);
-                rightMinNode->rightNode = this->removeMin(node->rightNode);
-                rightMinNode->leftNode = node->leftNode;
-                node = NULL;
-                delete node;
-                return rightMinNode;
+                T rightMinV = this->minNode(rootNode->rightNode)->v;
+                Node *newRootNode = new Node(rightMinV);
+                newRootNode->leftNode = rootNode->leftNode;
+                newRootNode->rightNode = rootNode->rightNode;
+                this->removeMin(rootNode->rightNode);
+                rootNode = NULL;
+                delete(rootNode);
+                return newRootNode;
             }
 
         }
@@ -260,7 +263,7 @@ public:
      */
     void levelOrderTraverse() {
         assert(!this->isEmpty());
-        cout<<"levelOrderTraverse ";
+        cout<<"levelOrderTraverse";
         CircularQueue<Node *> nodeCircularQueue(this->getSize());
         nodeCircularQueue.enqueue(this->rootNode);
         while( !nodeCircularQueue.isEmpty() ) {
@@ -277,8 +280,8 @@ public:
         cout<<endl;
     }
 
-    void add(T v) {
-        this->rootNode = this->add(this->rootNode, v);
+    void insert(T v) {
+        this->rootNode = this->insert(this->rootNode, v);
     }
 
     bool isEmpty() {
