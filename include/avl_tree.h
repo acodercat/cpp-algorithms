@@ -41,26 +41,29 @@ private:
             }
         }
         rootNode->height = max(this->getNodeHeight(rootNode->leftNode), this->getNodeHeight(rootNode->rightNode)) + 1;
-        int balanceFctor = this->getNodeBalanceFctor(rootNode);
-        // 如果左子树的高度大于右子树并且新节点是插入在该节点左子树的左子树上
-        if (balanceFctor > 1 && (this->getNodeBalanceFctor(rootNode->leftNode) >= 0)) { // LL
-            cout<<"left left"<<endl;
-            return rightRotate(rootNode);
-        } else if (balanceFctor > 1 && (this->getNodeBalanceFctor(rootNode->leftNode) < 0)) { // LR
-            cout<<"left right"<<endl;
-            rootNode->leftNode = leftRotate(rootNode->leftNode);
-            return rightRotate(rootNode);
-        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(rootNode->rightNode) >= 0)) { // RL
-            cout<<"right left"<<endl;
-            rootNode->rightNode = rightRotate(rootNode->rightNode);
-            return leftRotate(rootNode);
-        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(rootNode->rightNode) < 0)) { // RR
-            cout<<"right right"<<endl;
-            return leftRotate(rootNode);
-        }
-        return rootNode;
+        return this->maintainBalance(rootNode);
     }
 
+    Node *maintainBalance(Node *node) {
+        int balanceFctor = this->getNodeBalanceFctor(node);
+        // 如果左子树的高度大于右子树并且新节点是插入在该节点左子树的左子树上
+        if (balanceFctor > 1 && (this->getNodeBalanceFctor(node->leftNode) >= 0)) { // LL
+            cout<<"left left"<<endl;
+            return this->rightRotate(node);
+        } else if (balanceFctor > 1 && (this->getNodeBalanceFctor(node->leftNode) < 0)) { // LR
+            cout<<"left right"<<endl;
+            node->leftNode = this->leftRotate(node->leftNode);
+            return this->rightRotate(node);
+        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(node->rightNode) >= 0)) { // RL
+            cout<<"right left"<<endl;
+            node->rightNode = this->rightRotate(node->rightNode);
+            return this->leftRotate(node);
+        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(node->rightNode) < 0)) { // RR
+            cout<<"right right"<<endl;
+            return this->leftRotate(node);
+        }
+        return node;
+    }
 
     Node *remove(Node *rootNode, T v) {
         if (NULL == rootNode) {
@@ -101,25 +104,7 @@ private:
         }
 
         newRootNode->height = max(this->getNodeHeight(newRootNode->leftNode), this->getNodeHeight(newRootNode->rightNode)) + 1;
-        int balanceFctor = this->getNodeBalanceFctor(newRootNode);
-        // 如果左子树的高度大于右子树并且新节点是插入在该节点左子树的左子树上
-        if (balanceFctor > 1 && (this->getNodeBalanceFctor(newRootNode->leftNode) >= 0)) { // LL
-            cout<<"left left"<<endl;
-            return rightRotate(newRootNode);
-        } else if (balanceFctor > 1 && (this->getNodeBalanceFctor(newRootNode->leftNode) < 0)) { // LR
-            cout<<"left right"<<endl;
-            newRootNode->leftNode = leftRotate(newRootNode->leftNode);
-            return rightRotate(newRootNode);
-        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(newRootNode->rightNode) >= 0)) { // RL
-            cout<<"right left"<<endl;
-            newRootNode->rightNode = rightRotate(newRootNode->rightNode);
-            return leftRotate(newRootNode);
-        } else if (balanceFctor < -1 && (this->getNodeBalanceFctor(newRootNode->rightNode) < 0)) { // RR
-            cout<<"right right"<<endl;
-            return leftRotate(newRootNode);
-        }
-
-        return newRootNode;
+        return this->maintainBalance(newRootNode);
 
     }
 
