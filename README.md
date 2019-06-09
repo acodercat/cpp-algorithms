@@ -6,7 +6,7 @@
 ### 目录
 
 | Name | Demo File | Header File | Is Completed |
-|------|------|------|------|------|
+|------|------|------|------|
 |Linked List|https://github.com/acodercat/cpp-algorithms/blob/master/src/demo/linked_list.cpp|https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list.h| Y |
 |Circular Queue|https://github.com/acodercat/cpp-algorithms/blob/master/src/demo/circular_queue.cpp|https://github.com/acodercat/cpp-algorithms/blob/master/include/circular_queue.h| Y |
 |Circular Linked List|https://github.com/acodercat/cpp-algorithms/blob/master/src/demo/circular_linked_list.cpp|https://github.com/acodercat/cpp-algorithms/blob/master/include/circular_linked_list.h| Y |
