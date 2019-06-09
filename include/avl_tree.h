@@ -5,6 +5,7 @@
 #ifndef CPP_ALGORITHMS_AVL_TREE_H
 #define CPP_ALGORITHMS_AVL_TREE_H
 #include <assert.h>
+#include <iostream>
 using namespace std;
 
 /*
@@ -209,7 +210,6 @@ public:
             }
         }
         return NULL;
-
     }
 
 
