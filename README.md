@@ -5,5 +5,6 @@
 
 ### 目录
 
-| Linked List | Demo File | Header File | Is Completed |
-|------|------|------|------|
+| Name | Is Completed |
+|------|------|
+|[Linked List](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list.h)| Y |
