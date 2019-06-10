@@ -18,27 +18,27 @@ template<typename T>
 class AVLTree {
 private:
     typedef struct Node {
-        T v;
+        T element;
         Node *leftNode = NULL, *rightNode = NULL;
         unsigned int height = 1;
-        Node(T v) {
+        Node(T element) {
             this->leftNode = NULL;
             this->rightNode = NULL;
-            this->v = v;
+            this->element = element;
             this->height = 1;
         }
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node *insert(Node *rootNode, T v) {
+    Node *insert(Node *rootNode, T element) {
         if (NULL == rootNode) {
             this->size ++;
-            return new Node(v);
+            return new Node(element);
         } else {
-            if (v < rootNode->v) {
-                rootNode->leftNode = this->insert(rootNode->leftNode, v);
-            } else if (v > rootNode->v) {
-                rootNode->rightNode = this->insert(rootNode->rightNode, v);
+            if (element < rootNode->element) {
+                rootNode->leftNode = this->insert(rootNode->leftNode, element);
+            } else if (element > rootNode->element) {
+                rootNode->rightNode = this->insert(rootNode->rightNode, element);
             }
         }
         rootNode->height = max(this->getNodeHeight(rootNode->leftNode), this->getNodeHeight(rootNode->rightNode)) + 1;
@@ -66,16 +66,16 @@ private:
         return node;
     }
 
-    Node *remove(Node *rootNode, T v) {
+    Node *remove(Node *rootNode, T element) {
         if (NULL == rootNode) {
             return NULL;
         }
         Node *newRootNode = NULL;
-        if (v < rootNode->v) {
-            rootNode->leftNode = this->remove(rootNode->leftNode, v);
+        if (element < rootNode->element) {
+            rootNode->leftNode = this->remove(rootNode->leftNode, element);
             newRootNode = rootNode;
-        } else if (v > rootNode->v) {
-            rootNode->rightNode = this->remove(rootNode->rightNode, v);
+        } else if (element > rootNode->element) {
+            rootNode->rightNode = this->remove(rootNode->rightNode, element);
             newRootNode = rootNode;
         } else {
             if (NULL == rootNode->leftNode) {
@@ -91,10 +91,10 @@ private:
                 delete(rootNode);
                 newRootNode == leftNode;
             } else {
-                T rightMinV = this->minNode(rootNode->rightNode)->v;
-                newRootNode = new Node(rightMinV);
+                T rightMinElement = this->minNode(rootNode->rightNode)->element;
+                newRootNode = new Node(rightMinElement);
                 newRootNode->leftNode = rootNode->leftNode;
-                newRootNode->rightNode = this->remove(rootNode->rightNode, rightMinV);
+                newRootNode->rightNode = this->remove(rootNode->rightNode, rightMinElement);
                 rootNode = NULL;
                 delete(rootNode);
             }
@@ -140,17 +140,17 @@ private:
         return newRootNode;
     }
 
-    bool contains(Node *node, T v) {
+    bool contains(Node *node, T element) {
         if (NULL == node) {
             return false;
         }
 
-        if (v == node->v) {
+        if (element == node->element) {
             return true;
-        } else if (v < node->v) {
-            return this->contains(node->leftNode, v);
+        } else if (element < node->element) {
+            return this->contains(node->leftNode, element);
         } else {
-            return this->contains(node->rightNode, v);
+            return this->contains(node->rightNode, element);
         }
     }
 
@@ -198,12 +198,12 @@ public:
         this->rootNode = this->remove(this->rootNode, v);
     }
 
-    Node *find(T v) {
+    Node *find(T element) {
         Node *currentNode = this->rootNode;
         while( currentNode != NULL ) {
-            if ( v == currentNode->v ) {
+            if ( element == currentNode->element ) {
                 return currentNode;
-            } else if ( v < (currentNode->v) ) {
+            } else if ( element < (currentNode->element) ) {
                 currentNode = currentNode->leftNode;
             } else {
                 currentNode = currentNode->rightNode;
@@ -213,16 +213,16 @@ public:
     }
 
 
-    void insert(T v) {
-        this->rootNode = this->insert(this->rootNode, v);
+    void insert(T element) {
+        this->rootNode = this->insert(this->rootNode, element);
     }
 
     bool isEmpty() {
         return 0 == this->getSize();
     }
 
-    bool contains(T v) {
-        return this->contains(this->rootNode, v);
+    bool contains(T element) {
+        return this->contains(this->rootNode, element);
     }
 
 };

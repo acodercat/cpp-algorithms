@@ -36,9 +36,9 @@ public:
         return top;
     }
 
-    void push(T v) {
+    void push(T element) {
         assert(!this->isFull());
-        this->container[this->getSize()] = v;
+        this->container[this->getSize()] = element;
         this->size++;
     }
 

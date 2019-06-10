@@ -12,7 +12,7 @@ class LinkedListStack {
 
 private:
     typedef struct Node {
-        int v;
+        int element;
         Node *next;
     } Node;
 
@@ -24,9 +24,9 @@ public:
         this->size = 0;
     }
 
-    void push(int v) {
+    void push(int element) {
         Node *newNode = new Node;
-        newNode->v = v;
+        newNode->element = element;
         newNode->next = this->top;
         this->top = newNode;
         this->size ++;
@@ -36,11 +36,11 @@ public:
     int pop() {
         assert(!this->isEmpty());
         Node *top = this->top;
-        int v = this->top->v;
+        int element = this->top->element;
         this->top = top->next;
         delete top;
         this->size --;
-        return v;
+        return element;
     }
 
     bool isEmpty() {

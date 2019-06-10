@@ -15,7 +15,7 @@ private:
     typedef struct Node {
 
     public:
-        int v;
+        int element;
         char c;
         bool isKey;
         short int childNodeNum = 0;
@@ -54,7 +54,7 @@ public:
         this->rootNode = new Node;
     }
 
-    void insert(string key, int v) {
+    void insert(string key, int element) {
         Node *currentNode = this->rootNode;
         for(int i = 0; i <= key.length(); i ++) {
             if (Node *node = currentNode->findChildNode(key[i])) {
@@ -70,7 +70,7 @@ public:
             this->size ++;
             currentNode->isKey = true;
         }
-        currentNode->v = v;
+        currentNode->element = element;
     }
 
     Node *find(string key) {

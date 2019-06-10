@@ -15,7 +15,7 @@ class CircularQueue {
 private:
     unsigned int capacity = 0;
     unsigned int size = 0;
-    T *arr = NULL;
+    T *container = NULL;
     int frontIndex = 0;
     int tailIndex = 0;
 
@@ -29,20 +29,20 @@ public:
         this->capacity = capacity;
         this->frontIndex = 0;
         this->tailIndex = 0;
-        this->arr = (T *)malloc(capacity * sizeof(T));
-        memset(this->arr, 0, capacity * sizeof(T));
+        this->container = (T *)malloc(capacity * sizeof(T));
+        memset(this->container, 0, capacity * sizeof(T));
     }
 
     void enqueue(T v) {
         assert(!this->isFull());
-        this->arr[this->tailIndex] = v;
+        this->container[this->tailIndex] = v;
         this->tailIndex = this->getNextIndex(this->tailIndex);
         this->size ++;
     }
 
     T dequeue() {
         assert(!this->isEmpty());
-        T front = this->arr[this->frontIndex];
+        T front = this->container[this->frontIndex];
         this->frontIndex = this->getNextIndex(this->frontIndex);
         this->size --;
         return front;
@@ -61,7 +61,7 @@ public:
     }
 
     ~CircularQueue() {
-        free(this->arr);
+        free(this->container);
     }
 };
 

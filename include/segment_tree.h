@@ -12,7 +12,7 @@ template<typename T>
 class SegmentTree {
 private:
     typedef struct Node {
-        T v;
+        T element;
         Node *leftNode = NULL, *rightNode = NULL;
     } Node;
 
@@ -21,20 +21,20 @@ private:
     Node *buildSegmentTree(T arr[], unsigned int leftIndex, unsigned int rightIndex) {
         Node *node = new Node();
         if ( leftIndex == rightIndex ) {
-            node->v = arr[leftIndex];
+            node->element = arr[leftIndex];
             return node;
         }
         unsigned int midIndex = (rightIndex - leftIndex) / 2 + leftIndex;
         node->leftNode = this->buildSegmentTree(arr, leftIndex, midIndex);
         node->rightNode = this->buildSegmentTree(arr, midIndex + 1, rightIndex);
-        node->v = node->leftNode->v + node->rightNode->v;
+        node->element = node->leftNode->element + node->rightNode->element;
         return node;
     }
 
     T query(Node *node, unsigned int leftIndex, unsigned int rightIndex, unsigned int qLeftIndex, unsigned int qRightIndex) {
 
         if ( leftIndex == qLeftIndex && rightIndex == qRightIndex ) {
-            return node->v;
+            return node->element;
         }
         unsigned int midIndex = (rightIndex - leftIndex) / 2 + leftIndex;
 //        unsigned int qMidIndex = (qRightIndex - qLeftIndex) / 2 + qLeftIndex;
@@ -53,19 +53,19 @@ private:
         return v1 + v2;
     }
 
-    void update(Node *node, unsigned int leftIndex, unsigned int rightIndex, unsigned int updateIndex, T v) {
+    void update(Node *node, unsigned int leftIndex, unsigned int rightIndex, unsigned int updateIndex, T element) {
         if ( leftIndex == rightIndex ) {
-            node->v = v;
+            node->element = element;
             return;
         }
         unsigned int midIndex = (rightIndex - leftIndex) / 2 + leftIndex;
         if (updateIndex <= midIndex) {
-            this->update(node->leftNode, leftIndex, midIndex, updateIndex, v);
+            this->update(node->leftNode, leftIndex, midIndex, updateIndex, element);
         } else {
-            this->update(node->rightNode, midIndex + 1, rightIndex, updateIndex, v);
+            this->update(node->rightNode, midIndex + 1, rightIndex, updateIndex, element);
         }
          // 后续遍历
-        node->v = node->leftNode->v + node->rightNode->v;
+        node->element = node->leftNode->element + node->rightNode->element;
         return;
     }
 
@@ -80,8 +80,8 @@ public:
         return this->query(this->rootNode, 0, this->getSize() - 1, qLeftIndex, qRightIndex);
     }
 
-    void update(unsigned int updateIndex, T v) {
-        this->update(this->rootNode, 0, this->getSize() - 1, updateIndex, v);
+    void update(unsigned int updateIndex, T element) {
+        this->update(this->rootNode, 0, this->getSize() - 1, updateIndex, element);
     }
 
     unsigned int getSize() {

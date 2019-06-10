@@ -19,41 +19,41 @@ template<typename T>
 class BinarySearchTree {
 private:
     typedef struct Node {
-        T v;
+        T element;
         Node *leftNode = NULL, *rightNode = NULL;
-        Node(T v) {
+        Node(T element) {
             this->leftNode = NULL;
             this->rightNode = NULL;
-            this->v = v;
+            this->element = element;
         }
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node * insert(Node *rootNode, T v) {
+    Node * insert(Node *rootNode, T element) {
         if (NULL == rootNode) {
             this->size ++;
-            return new Node(v);
+            return new Node(element);
         } else {
-            if (v < rootNode->v) {
-                rootNode->leftNode = this->insert(rootNode->leftNode, v);
-            } else if (v > rootNode->v) {
-                rootNode->rightNode = this->insert(rootNode->rightNode, v);
+            if (element < rootNode->element) {
+                rootNode->leftNode = this->insert(rootNode->leftNode, element);
+            } else if (element > rootNode->element) {
+                rootNode->rightNode = this->insert(rootNode->rightNode, element);
             }
         }
         return rootNode;
     }
 
-    bool contains(Node *node, T v) {
+    bool contains(Node *node, T element) {
         if (NULL == node) {
             return false;
         }
 
-        if (v == node->v) {
+        if (element == node->element) {
             return true;
-        } else if (v < node->v) {
-            return this->contains(node->leftNode, v);
+        } else if (element < node->element) {
+            return this->contains(node->leftNode, element);
         } else {
-            return this->contains(node->rightNode, v);
+            return this->contains(node->rightNode, element);
         }
     }
 
@@ -62,7 +62,7 @@ private:
             return;
         }
         this->inOrderTraverse(node->leftNode);
-        cout<<node->v<<" ";
+        cout<<node->element<<" ";
         this->inOrderTraverse(node->rightNode);
     }
 
@@ -73,7 +73,7 @@ private:
         }
         this->postOrderTraverse(node->leftNode);
         this->postOrderTraverse(node->rightNode);
-        cout<<node->v<<" ";
+        cout<<node->element<<" ";
     }
 
     Node *removeMin(Node *node) {
@@ -109,7 +109,7 @@ public:
         cout<<"preOrderTraverse ";
         while( !nodeStack.isEmpty() ) {
             Node *currentNode = nodeStack.top();
-            cout<<currentNode->v<<" ";
+            cout<<currentNode->element<<" ";
             nodeStack.pop();
 
             if (currentNode->rightNode != NULL) {
@@ -129,7 +129,7 @@ public:
         while(currentNode->leftNode != NULL) {
             currentNode = currentNode->leftNode;
         }
-        return currentNode->v;
+        return currentNode->element;
     }
 
 
@@ -149,12 +149,12 @@ public:
         return min;
     }
 
-    Node *find(T v) {
+    Node *find(T element) {
         Node *currentNode = this->rootNode;
         while( currentNode != NULL ) {
-            if ( v == currentNode->v ) {
+            if ( element == currentNode->element ) {
                 return currentNode;
-            } else if ( v < (currentNode->v) ) {
+            } else if ( element < (currentNode->element) ) {
                 currentNode = currentNode->leftNode;
             } else {
                 currentNode = currentNode->rightNode;
@@ -165,16 +165,16 @@ public:
     }
 
 
-    Node *remove(Node *node, T v) {
+    Node *remove(Node *node, T element) {
         if( node == NULL ) {
             return NULL;
         }
 
-        if ( v < node->v ) {
-            node->leftNode = this->remove(node->leftNode, v);
+        if ( element < node->element ) {
+            node->leftNode = this->remove(node->leftNode, element);
             return node;
-        } else if (v > node->v) {
-            node->rightNode = this->remove(node->rightNode, v);
+        } else if (element > node->element) {
+            node->rightNode = this->remove(node->rightNode, element);
             return node;
         } else {
             if ( NULL == node->leftNode ) {
@@ -190,8 +190,8 @@ public:
                 delete node;
                 return leftNode;
             } else {
-                T rightMinV = this->minNode(rootNode->rightNode)->v;
-                Node *newRootNode = new Node(rightMinV);
+                T rightMinElement = this->minNode(rootNode->rightNode)->element;
+                Node *newRootNode = new Node(rightMinElement);
                 newRootNode->leftNode = rootNode->leftNode;
                 newRootNode->rightNode = rootNode->rightNode;
                 this->removeMin(rootNode->rightNode);
@@ -203,9 +203,9 @@ public:
         }
     }
 
-    void remove(T v) {
+    void remove(T element) {
         assert(!this->isEmpty());
-        this->rootNode = this->remove(this->rootNode, v);
+        this->rootNode = this->remove(this->rootNode, element);
         return;
     }
 
@@ -241,7 +241,7 @@ public:
         while(currentNode->rightNode != NULL) {
             currentNode = currentNode->rightNode;
         }
-        return currentNode->v;
+        return currentNode->element;
     }
 
     void inOrderTraverse() {
@@ -268,7 +268,7 @@ public:
         nodeCircularQueue.enqueue(this->rootNode);
         while( !nodeCircularQueue.isEmpty() ) {
             Node *currentNode = nodeCircularQueue.dequeue();
-            cout<<currentNode->v<<" ";
+            cout<<currentNode->element<<" ";
             if (currentNode->leftNode != NULL) {
                 nodeCircularQueue.enqueue(currentNode->leftNode);
             }
@@ -280,16 +280,16 @@ public:
         cout<<endl;
     }
 
-    void insert(T v) {
-        this->rootNode = this->insert(this->rootNode, v);
+    void insert(T element) {
+        this->rootNode = this->insert(this->rootNode, element);
     }
 
     bool isEmpty() {
         return 0 == this->getSize();
     }
 
-    bool contains(T v) {
-        return this->contains(this->rootNode, v);
+    bool contains(T element) {
+        return this->contains(this->rootNode, element);
     }
 
 };

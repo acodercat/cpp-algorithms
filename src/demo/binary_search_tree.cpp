@@ -31,6 +31,6 @@ int main() {
     cout<<"remove 99 "<<endl;
     binarySearchTree.remove(99);
     binarySearchTree.levelOrderTraverse();
-    cout<<"find :"<<binarySearchTree.find(2)->v<<endl;
+    cout<<"find :"<<binarySearchTree.find(2)->element<<endl;
 
 }

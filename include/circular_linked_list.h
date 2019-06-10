@@ -13,7 +13,7 @@ using namespace std;
 class CircularLinkedList {
 private:
     typedef struct Node {
-        int v;
+        int element;
         Node *next = NULL, *prev = NULL;
     } Node;
 
@@ -25,9 +25,9 @@ public:
         this->dummyHead = new Node;
     }
 
-    void insert(int v) {
+    void insert(int element) {
         Node *newNode = new Node;
-        newNode->v = v;
+        newNode->element = element;
         Node **head = &(this->dummyHead->next);
         Node **tail = &(this->dummyHead->prev);
         if (NULL == *head) {
@@ -55,7 +55,7 @@ public:
         Node *currentNode = this->dummyHead->next;
         string str = "head";
         while(this->dummyHead != currentNode) {
-            str = str + "->" + to_string(currentNode->v);
+            str = str + "->" + to_string(currentNode->element);
             currentNode = currentNode->next;
         }
         return str;

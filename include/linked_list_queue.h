@@ -13,7 +13,7 @@ class LinkedListQueue {
 
 private:
     typedef struct Node {
-        int v;
+        int element;
         Node *next = NULL;
     } Node;
 
@@ -28,9 +28,9 @@ public:
         this->size = 0;
     }
 
-    void enqueue (int v) {
+    void enqueue (int element) {
         Node *node = new Node;
-        node->v = v;
+        node->element = element;
         if (NULL == this->head) {
             this->head = node;
             this->tail = this->head;
@@ -44,7 +44,7 @@ public:
     int dequeue () {
         assert(!this->isEmpty());
         Node *head = this->head;
-        int v = head->v;
+        int element = head->element;
         if (head == this->tail) {
             this->head = NULL;
             this->tail = NULL;
@@ -53,7 +53,7 @@ public:
         }
         this->size --;
         delete head;
-        return v;
+        return element;
 
     }
 
@@ -69,7 +69,7 @@ public:
         Node *currentNode = this->head;
         string str = "head";
         while(NULL != currentNode) {
-            str = str + "->" + to_string(currentNode->v);
+            str = str + "->" + to_string(currentNode->element);
             currentNode = currentNode->next;
         }
 

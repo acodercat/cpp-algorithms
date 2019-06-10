@@ -15,7 +15,7 @@ template<typename T>
 class LinkedList {
 private:
     typedef struct Node {
-        T v;
+        T element;
         Node *next;
     } Node;
     Node *head = NULL;
@@ -27,13 +27,13 @@ public:
         this->size = 0;
     }
 
-    void remove(int v) {
+    void remove(T element) {
         Node *dummyNode = new Node;
         dummyNode->next = this->head;
 
         Node *prevNode = dummyNode;
         while(prevNode->next != NULL) {
-            if (prevNode->next->v == v) {
+            if (prevNode->next->element == element) {
                 Node *delNode = prevNode->next;
                 prevNode->next = prevNode->next->next;
                 this->size --;
@@ -46,9 +46,9 @@ public:
         this->head = dummyNode->next;
     }
 
-    void insert(T v) {
+    void insert(T element) {
         Node *node = new Node();
-        node->v = v;
+        node->element = element;
         node->next = this->head;
         this->head = node;
         this->size ++;
@@ -58,7 +58,7 @@ public:
         Node *currentNode = this->head;
         string str = "head";
         while(NULL != currentNode) {
-            str = str + "->" + to_string(currentNode->v);
+            str = str + "->" + to_string(currentNode->element);
             currentNode = currentNode->next;
         }
 

@@ -12,16 +12,16 @@ template<typename T>
 class RedBlackTree {
 private:
     typedef struct Node {
-        T v;
+        T element;
         enum {
             RED,
             BLACK
         } color;
         Node *leftNode = NULL, *rightNode = NULL;
-        Node(T v) {
+        Node(T element) {
             this->leftNode = NULL;
             this->rightNode = NULL;
-            this->v = v;
+            this->element = element;
             this->color = RED;
         }
     } Node;
@@ -61,15 +61,15 @@ private:
         node->leftNode->color = Node::BLACK;
     }
 
-    Node *insert(Node *rootNode, T v) {
+    Node *insert(Node *rootNode, T element) {
         if (NULL == rootNode) {
             this->size ++;
-            return new Node(v);
+            return new Node(element);
         } else {
-            if (v < rootNode->v) {
-                rootNode->leftNode = this->insert(rootNode->leftNode, v);
-            } else if (v > rootNode->v) {
-                rootNode->rightNode = this->insert(rootNode->rightNode, v);
+            if (element < rootNode->element) {
+                rootNode->leftNode = this->insert(rootNode->leftNode, element);
+            } else if (element > rootNode->element) {
+                rootNode->rightNode = this->insert(rootNode->rightNode, element);
             }
         }
 
@@ -88,17 +88,17 @@ private:
         return rootNode;
     }
 
-    bool contains(Node *node, T v) {
+    bool contains(Node *node, T element) {
         if (NULL == node) {
             return false;
         }
 
-        if (v == node->v) {
+        if (element == node->element) {
             return true;
-        } else if (v < node->v) {
-            return this->contains(node->leftNode, v);
+        } else if (element < node->element) {
+            return this->contains(node->leftNode, element);
         } else {
-            return this->contains(node->rightNode, v);
+            return this->contains(node->rightNode, element);
         }
     }
 
@@ -109,12 +109,12 @@ public:
         this->size = 0;
     }
 
-    Node *find(T v) {
+    Node *find(T element) {
         Node *currentNode = this->rootNode;
         while( currentNode != NULL ) {
-            if ( v == currentNode->v ) {
+            if ( element == currentNode->element ) {
                 return currentNode;
-            } else if ( v < (currentNode->v) ) {
+            } else if ( element < (currentNode->element) ) {
                 currentNode = currentNode->leftNode;
             } else {
                 currentNode = currentNode->rightNode;
@@ -127,8 +127,8 @@ public:
         return this->size;
     }
 
-    void insert(T v) {
-        this->rootNode = this->insert(this->rootNode, v);
+    void insert(T element) {
+        this->rootNode = this->insert(this->rootNode, element);
         this->rootNode->color = Node::BLACK;
     }
 
@@ -136,8 +136,8 @@ public:
         return 0 == this->getSize();
     }
 
-    bool contains(T v) {
-        return this->contains(this->rootNode, v);
+    bool contains(T element) {
+        return this->contains(this->rootNode, element);
     }
 
 
