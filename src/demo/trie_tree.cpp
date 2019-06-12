@@ -13,6 +13,6 @@ int main() {
     trieTree->insert("cat", 3214234);
     trieTree->insert("cat1212", 555555);
     trieTree->insert("3333", 555555);
-    cout<<trieTree->find("cat1212")->v<<endl;
+    cout<<trieTree->find("cat1212")->element<<endl;
 
 }
