@@ -1,0 +1,8 @@
+//
+// Created by codercat on 19-6-12.
+//
+
+#ifndef CPP_ALGORITHMS_LINKED_LIST_MAP_H
+#define CPP_ALGORITHMS_LINKED_LIST_MAP_H
+
+#endif //CPP_ALGORITHMS_LINKED_LIST_MAP_H

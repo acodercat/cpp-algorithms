@@ -4,9 +4,8 @@
 
 
 #include <iostream>
-#include "tree_map.h"
+#include "linked_list_map.h"
 
 int main() {
     std::hash<std::string> h;
-    cout<<h("-1")<<endl;
 }
