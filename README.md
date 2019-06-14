@@ -25,5 +25,5 @@ inclde中存放的是算法实现的头文件,demo中是对每个算法的使用
 |[Hash Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/hash_map.h)| Y |
 |[Linked List Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_map.h)| Y |
 |[Max Heap](https://github.com/acodercat/cpp-algorithms/blob/master/include/max_heap.h)| Y |
-|[Priority_Queue](https://github.com/acodercat/cpp-algorithms/blob/master/include/priority_queue.h)| Y |
+|[Priority Queue](https://github.com/acodercat/cpp-algorithms/blob/master/include/priority_queue.h)| Y |
 |[Kd Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/kd_tree.h)| N |
