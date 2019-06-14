@@ -8,35 +8,35 @@
 #ifndef ALGORITHM_STACK_H
 #define ALGORITHM_STACK_H
 
-template<typename T>
+template<typename E>
 class Stack {
 
 private:
     unsigned int capacity = 0;
     unsigned int size = 0;
-    T *container;
+    E *container;
 
 public:
     Stack(unsigned int capacity) {
         assert(capacity > 0);
         this->capacity = capacity;
-        this->container = (T *)malloc(capacity * sizeof(T));
-        memset(this->container, 0, capacity * sizeof(T));
+        this->container = new E[capacity];
+        memset(this->container, 0, capacity * sizeof(E));
     }
 
     void pop() {
         assert(!this->isEmpty());
-        T top = this->container[this->getSize() - 1];
+        E top = this->container[this->getSize() - 1];
         this->size--;
     }
 
-    T top() {
+    E top() {
         assert(!this->isEmpty());
-        T top = this->container[this->getSize() - 1];
+        E top = this->container[this->getSize() - 1];
         return top;
     }
 
-    void push(T element) {
+    void push(E element) {
         assert(!this->isFull());
         this->container[this->getSize()] = element;
         this->size++;

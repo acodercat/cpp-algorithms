@@ -8,17 +8,17 @@
 #include <iostream>
 using namespace std;
 
-template<typename T>
+template<typename E>
 class RedBlackTree {
 private:
     typedef struct Node {
-        T element;
+        E element;
         enum {
             RED,
             BLACK
         } color;
         Node *leftNode = NULL, *rightNode = NULL;
-        Node(T element) {
+        Node(E element) {
             this->leftNode = NULL;
             this->rightNode = NULL;
             this->element = element;
@@ -61,7 +61,7 @@ private:
         node->leftNode->color = Node::BLACK;
     }
 
-    Node *insert(Node *rootNode, T element) {
+    Node *insert(Node *rootNode, E element) {
         if (NULL == rootNode) {
             this->size ++;
             return new Node(element);
@@ -88,7 +88,7 @@ private:
         return rootNode;
     }
 
-    bool contains(Node *node, T element) {
+    bool contains(Node *node, E element) {
         if (NULL == node) {
             return false;
         }
@@ -109,7 +109,7 @@ public:
         this->size = 0;
     }
 
-    Node *find(T element) {
+    Node *find(E element) {
         Node *currentNode = this->rootNode;
         while( currentNode != NULL ) {
             if ( element == currentNode->element ) {
@@ -127,7 +127,7 @@ public:
         return this->size;
     }
 
-    void insert(T element) {
+    void insert(E element) {
         this->rootNode = this->insert(this->rootNode, element);
         this->rootNode->color = Node::BLACK;
     }
@@ -136,7 +136,7 @@ public:
         return 0 == this->getSize();
     }
 
-    bool contains(T element) {
+    bool contains(E element) {
         return this->contains(this->rootNode, element);
     }
 

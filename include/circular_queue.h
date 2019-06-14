@@ -9,12 +9,12 @@
 #include <cstring>
 #include <assert.h>
 
-template<typename T>
+template<typename E>
 class CircularQueue {
 private:
     unsigned int capacity = 0;
     unsigned int size = 0;
-    T *container = NULL;
+    E *container = NULL;
     int frontIndex = 0;
     int tailIndex = 0;
 
@@ -28,19 +28,19 @@ public:
         this->capacity = capacity;
         this->frontIndex = 0;
         this->tailIndex = 0;
-        this->container = new T[capacity];
+        this->container = new E[capacity];
     }
 
-    void enqueue(T v) {
+    void enqueue(E v) {
         assert(!this->isFull());
         this->container[this->tailIndex] = v;
         this->tailIndex = this->getNextIndex(this->tailIndex);
         this->size ++;
     }
 
-    T dequeue() {
+    E dequeue() {
         assert(!this->isEmpty());
-        T front = this->container[this->frontIndex];
+        E front = this->container[this->frontIndex];
         this->frontIndex = this->getNextIndex(this->frontIndex);
         this->size --;
         return front;

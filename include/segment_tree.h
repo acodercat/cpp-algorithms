@@ -8,17 +8,17 @@
 #include <iostream>
 using namespace std;
 
-template<typename T>
+template<typename E>
 class SegmentTree {
 private:
     typedef struct Node {
-        T element;
+        E element;
         Node *leftNode = NULL, *rightNode = NULL;
     } Node;
 
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node *buildSegmentTree(T arr[], unsigned int leftIndex, unsigned int rightIndex) {
+    Node *buildSegmentTree(E arr[], unsigned int leftIndex, unsigned int rightIndex) {
         Node *node = new Node();
         if ( leftIndex == rightIndex ) {
             node->element = arr[leftIndex];
@@ -31,7 +31,7 @@ private:
         return node;
     }
 
-    T query(Node *node, unsigned int leftIndex, unsigned int rightIndex, unsigned int qLeftIndex, unsigned int qRightIndex) {
+    E query(Node *node, unsigned int leftIndex, unsigned int rightIndex, unsigned int qLeftIndex, unsigned int qRightIndex) {
 
         if ( leftIndex == qLeftIndex && rightIndex == qRightIndex ) {
             return node->element;
@@ -45,8 +45,8 @@ private:
             return this->query(node->rightNode, midIndex + 1, rightIndex, qLeftIndex, qRightIndex);
         }
         // 这一步不好理解,当要查找的区间分别在当前节点的左右2个子区间内的时候,由于索引是连续的,那么一定是以当前节点的midIndex作为分隔.因为它们们是连续相邻的!!!!!
-        T v1 = this->query(node->leftNode, leftIndex, midIndex, qLeftIndex, midIndex);
-        T v2 = this->query(node->rightNode, midIndex + 1, rightIndex, midIndex + 1, qRightIndex);
+        E v1 = this->query(node->leftNode, leftIndex, midIndex, qLeftIndex, midIndex);
+        E v2 = this->query(node->rightNode, midIndex + 1, rightIndex, midIndex + 1, qRightIndex);
 
 //        T v1 = this->query(node->leftNode, leftIndex, midIndex, qLeftIndex, qMidIndex);
 //        T v2 = this->query(node->rightNode, midIndex + 1, rightIndex, qMidIndex + 1, qRightIndex);
@@ -70,17 +70,17 @@ private:
     }
 
 public:
-    SegmentTree(T arr[], unsigned int size) {
+    SegmentTree(E arr[], unsigned int size) {
         this->size = size;
         this->rootNode = this->buildSegmentTree(arr, 0, size - 1);
     }
 
 
-    T query( unsigned int qLeftIndex, unsigned int qRightIndex) {
+    E query( unsigned int qLeftIndex, unsigned int qRightIndex) {
         return this->query(this->rootNode, 0, this->getSize() - 1, qLeftIndex, qRightIndex);
     }
 
-    void update(unsigned int updateIndex, T element) {
+    void update(unsigned int updateIndex, E element) {
         this->update(this->rootNode, 0, this->getSize() - 1, updateIndex, element);
     }
 

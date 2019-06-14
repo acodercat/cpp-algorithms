@@ -10,7 +10,6 @@
 using namespace std;
 
 class LinkedListQueue {
-
 private:
     typedef struct Node {
         int element;
