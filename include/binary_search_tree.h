@@ -7,14 +7,10 @@
 
 #include "stack.h"
 #include <assert.h>
+#include <optional>
 #include "circular_queue.h"
 using namespace std;
-/*
- *
- *
- *
- *
- * */
+
 template<typename T>
 class BinarySearchTree {
 private:
@@ -149,18 +145,18 @@ public:
         return min;
     }
 
-    Node *find(T element) {
-        Node *currentNode = this->rootNode;
-        while( currentNode != NULL ) {
-            if ( element == currentNode->element ) {
-                return currentNode;
-            } else if ( element < (currentNode->element) ) {
-                currentNode = currentNode->leftNode;
+    optional<T> find(T element) {
+        Node *curNode = this->rootNode;
+        while( curNode != NULL ) {
+            if ( element == curNode->element ) {
+                return optional<T>(curNode->element);
+            } else if ( element < (curNode->element) ) {
+                curNode = curNode->leftNode;
             } else {
-                currentNode = currentNode->rightNode;
+                curNode = curNode->rightNode;
             }
         }
-        return NULL;
+        return optional<T>();
 
     }
 
