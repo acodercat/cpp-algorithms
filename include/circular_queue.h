@@ -6,7 +6,6 @@
 #ifndef ALGORITHM_CIRCULARQUEUE_H
 #define ALGORITHM_CIRCULARQUEUE_H
 
-#include <cstring>
 #include <assert.h>
 
 template<typename E>
@@ -31,9 +30,9 @@ public:
         this->container = new E[capacity];
     }
 
-    void enqueue(E v) {
+    void enqueue(E e) {
         assert(!this->isFull());
-        this->container[this->tailIndex] = v;
+        this->container[this->tailIndex] = e;
         this->tailIndex = this->getNextIndex(this->tailIndex);
         this->size ++;
     }
@@ -52,6 +51,10 @@ public:
 
     bool isFull() {
         return this->getSize() == this->capacity;
+    }
+
+    E getFront() {
+        return this->container[this->frontIndex];
     }
 
     unsigned int getSize() {

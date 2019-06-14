@@ -65,6 +65,7 @@ private:
 
 public:
     MaxHeap(unsigned capacity) {
+        assert(capacity > 0);
         this->container = new E[capacity];
         this->capacity = capacity;
     }
@@ -72,6 +73,7 @@ public:
     // heapify
     MaxHeap(E *arr, unsigned capacity, unsigned size) {
         assert(capacity >= size);
+        assert(capacity > 0);
         this->container = arr;
         this->capacity = capacity;
         this->size = size;
@@ -123,6 +125,10 @@ public:
 
     bool isFull() {
         return this->size >= this->capacity;
+    }
+
+    ~MaxHeap() {
+        free(this->container);
     }
 
 };
