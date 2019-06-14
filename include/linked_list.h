@@ -28,22 +28,22 @@ public:
     }
 
     void remove(T element) {
-        Node *dummyNode = new Node;
-        dummyNode->next = this->head;
+        Node *dummyHeadNode = new Node;
+        dummyHeadNode->next = this->head;
 
-        Node *prevNode = dummyNode;
+        Node *prevNode = dummyHeadNode;
         while(prevNode->next != NULL) {
             if (prevNode->next->element == element) {
-                Node *delNode = prevNode->next;
+                Node *removeNode = prevNode->next;
                 prevNode->next = prevNode->next->next;
                 this->size --;
-                delete delNode;
+                delete removeNode;
             } else {
                 prevNode = prevNode->next;
             }
         }
 
-        this->head = dummyNode->next;
+        this->head = dummyHeadNode->next;
     }
 
     void insert(T element) {

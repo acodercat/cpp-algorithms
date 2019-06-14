@@ -1,7 +1,7 @@
 # C++ Algorithms
 [![Build Status](https://travis-ci.org/acodercat/cpp-algorithms.svg?branch=master)](https://travis-ci.org/acodercat/cpp-algorithms)
 
-使用C++实现了常用的算法与数据结构,不定期更新.
+使用C++实现了基础算法与数据结构,不定期更新.
 
 ### 目录结构说明
 inclde中存放的是算法实现的头文件,demo中是对每个算法的使用样例,它们之间一一对应.
@@ -23,5 +23,5 @@ inclde中存放的是算法实现的头文件,demo中是对每个算法的使用
 |[Trie Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/trie_tree.h)| Y |
 |[Union Find](https://github.com/acodercat/cpp-algorithms/blob/master/include/union_find.h)| Y |
 |[Hash Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/hash_map.h)| Y |
-|[Linked List Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_map.h)| N |
+|[Linked List Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_map.h)| Y |
 |[Kd Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/kd_tree.h)| N |

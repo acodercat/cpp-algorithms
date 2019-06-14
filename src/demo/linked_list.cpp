@@ -12,6 +12,6 @@ int main() {
     linkedList.insert(31);
     linkedList.insert(18);
     linkedList.remove(18);
-    linkedList.insert(28);
+//    linkedList.insert(28);
     std::cout << linkedList.toString() << std::endl;
 }
