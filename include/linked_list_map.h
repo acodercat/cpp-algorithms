@@ -5,7 +5,6 @@
 #ifndef CPP_ALGORITHMS_LINKED_LIST_MAP_H
 #define CPP_ALGORITHMS_LINKED_LIST_MAP_H
 
-//#include <assert.h>
 #include <iostream>
 #include <optional>
 using namespace std;

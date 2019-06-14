@@ -6,8 +6,9 @@
 #define CPP_ALGORITHMS_HASH_MAP_H
 
 #include <assert.h>
+#include "avl_tree_map.h"
 #include <iostream>
-#include <map>
+#include <optional>
 using namespace std;
 
 template<typename K, typename V>
@@ -15,7 +16,7 @@ class HashMap {
 private:
     unsigned M;
     unsigned size;
-    map<K, V> *hashtable;
+    AVLTreeMap<K, V> *hashtable;
 
     int hash(string k) {
         std::hash<string> hasher;
@@ -26,7 +27,7 @@ public:
     HashMap(int M = 73) {
         this->M = M;
         this->size = 0;
-        this->hashtable = new map<string, string>[M];
+        this->hashtable = new AVLTreeMap<K, V>[M];
     }
 
     void insert(K k, V v) {
@@ -35,21 +36,26 @@ public:
         if (!this->contrainsKey(k)) {
             this->size ++;
         }
-        this->hashtable[index][k] = v;
+        this->hashtable[index].insert(k, v);
     }
 
-    V find(K k) {
+    optional<V> find(K k) {
         unsigned index = this->hash(k);
         assert(index < this->M);
-        return this->hashtable[index][k];
+        return this->hashtable[index].find(k);
     }
 
     bool contrainsKey(K k) {
         unsigned index = this->hash(k);
-        if (this->hashtable[index].find(k) == this->hashtable[index].end()) {
+        if (this->hashtable[index].contrainsKey(k)) {
             return false;
         }
         return true;
+    }
+
+    bool remove(K k) {
+        unsigned index = this->hash(k);
+        this->hashtable[index].remove(k);
     }
 
     bool isEmpty() {

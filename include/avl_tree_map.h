@@ -2,43 +2,40 @@
 // Created by codercat on 2019-05-28.
 //
 
-#ifndef CPP_ALGORITHMS_AVL_TREE_H
-#define CPP_ALGORITHMS_AVL_TREE_H
+#ifndef CPP_ALGORITHMS_AVL_TREE_MAP_H
+#define CPP_ALGORITHMS_AVL_TREE_MAP_H
+
 #include <assert.h>
+#include <optional>
 #include <iostream>
 using namespace std;
 
-/*
- *
- *
- *
- *
- * */
-template<typename T>
-class AVLTree {
+template<typename K, typename V>
+class AVLTreeMap {
 private:
     typedef struct Node {
-        T element;
+        K k;
+        V v;
         Node *leftNode = NULL, *rightNode = NULL;
         unsigned int height = 1;
-        Node(T element) {
-            this->leftNode = NULL;
-            this->rightNode = NULL;
-            this->element = element;
+        Node(K k, V v) {
+            this->rightNode = this->leftNode = NULL;
+            this->k = k;
+            this->v = v;
             this->height = 1;
         }
     } Node;
     Node *rootNode = NULL;
     unsigned int size = 0;
-    Node *insert(Node *rootNode, T element) {
+    Node *insert(Node *rootNode, K k, V v) {
         if (NULL == rootNode) {
             this->size ++;
-            return new Node(element);
+            return new Node(k, v);
         } else {
-            if (element < rootNode->element) {
-                rootNode->leftNode = this->insert(rootNode->leftNode, element);
-            } else if (element > rootNode->element) {
-                rootNode->rightNode = this->insert(rootNode->rightNode, element);
+            if (k < rootNode->k) {
+                rootNode->leftNode = this->insert(rootNode->leftNode, k, v);
+            } else if (k > rootNode->k) {
+                rootNode->rightNode = this->insert(rootNode->rightNode, k, v);
             }
         }
         rootNode->height = max(this->getNodeHeight(rootNode->leftNode), this->getNodeHeight(rootNode->rightNode)) + 1;
@@ -66,16 +63,16 @@ private:
         return node;
     }
 
-    Node *remove(Node *rootNode, T element) {
+    Node *remove(Node *rootNode, K k) {
         if (NULL == rootNode) {
             return NULL;
         }
         Node *newRootNode = NULL;
-        if (element < rootNode->element) {
-            rootNode->leftNode = this->remove(rootNode->leftNode, element);
+        if (k < rootNode->k) {
+            rootNode->leftNode = this->remove(rootNode->leftNode, k);
             newRootNode = rootNode;
-        } else if (element > rootNode->element) {
-            rootNode->rightNode = this->remove(rootNode->rightNode, element);
+        } else if (k > rootNode->k) {
+            rootNode->rightNode = this->remove(rootNode->rightNode, k);
             newRootNode = rootNode;
         } else {
             if (NULL == rootNode->leftNode) {
@@ -91,10 +88,10 @@ private:
                 delete(rootNode);
                 newRootNode == leftNode;
             } else {
-                T rightMinElement = this->minNode(rootNode->rightNode)->element;
-                newRootNode = new Node(rightMinElement);
+                Node *rightMinNode = this->minNode(rootNode->rightNode);
+                newRootNode = new Node(rightMinNode->k, rightMinNode->v);
                 newRootNode->leftNode = rootNode->leftNode;
-                newRootNode->rightNode = this->remove(rootNode->rightNode, rightMinElement);
+                newRootNode->rightNode = this->remove(rootNode->rightNode, rightMinNode->k);
                 rootNode = NULL;
                 delete(rootNode);
             }
@@ -140,17 +137,17 @@ private:
         return newRootNode;
     }
 
-    bool contains(Node *node, T element) {
+    bool contrainsKey(Node *node, K k) {
         if (NULL == node) {
             return false;
         }
 
-        if (element == node->element) {
+        if (k == node->k) {
             return true;
-        } else if (element < node->element) {
-            return this->contains(node->leftNode, element);
+        } else if (k < node->k) {
+            return this->contrainsKey(node->leftNode, k);
         } else {
-            return this->contains(node->rightNode, element);
+            return this->contrainsKey(node->rightNode, k);
         }
     }
 
@@ -173,7 +170,7 @@ private:
 
 
 public:
-    AVLTree() {
+    AVLTreeMap() {
         this->rootNode = NULL;
         this->size = 0;
     }
@@ -193,38 +190,38 @@ public:
         return node->height;
     }
 
-    void remove(T v) {
+    void remove(K k) {
         assert(!this->isEmpty());
-        this->rootNode = this->remove(this->rootNode, v);
+        this->rootNode = this->remove(this->rootNode, k);
     }
 
-    Node *find(T element) {
-        Node *currentNode = this->rootNode;
-        while( currentNode != NULL ) {
-            if ( element == currentNode->element ) {
-                return currentNode;
-            } else if ( element < (currentNode->element) ) {
-                currentNode = currentNode->leftNode;
+    optional<V> find(K k) {
+        Node *curNode = this->rootNode;
+        while( curNode != NULL ) {
+            if ( k == curNode->k ) {
+                return optional<V>(curNode->v);
+            } else if ( k < (curNode->k) ) {
+                curNode = curNode->leftNode;
             } else {
-                currentNode = currentNode->rightNode;
+                curNode = curNode->rightNode;
             }
         }
-        return NULL;
+        return optional<V>();
     }
 
 
-    void insert(T element) {
-        this->rootNode = this->insert(this->rootNode, element);
+    void insert(K k, V v) {
+        this->rootNode = this->insert(this->rootNode, k, v);
     }
 
     bool isEmpty() {
         return 0 == this->getSize();
     }
 
-    bool contains(T element) {
-        return this->contains(this->rootNode, element);
+    bool contrainsKey(K k) {
+        return this->contrainsKey(this->rootNode, k);
     }
 
 };
 
-#endif //CPP_ALGORITHMS_AVL_TREE_H
+#endif //CPP_ALGORITHMS_AVL_TREE_MAP_H

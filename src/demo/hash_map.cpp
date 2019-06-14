@@ -13,7 +13,10 @@ int main() {
     hmap->insert("codercat2", "rust3");
     hmap->insert("codercat3", "rust4");
     hmap->insert("codercat", "rust5");
-    cout<<"find:"<<hmap->find("codercat")<<endl;
+    cout<<"find:"<<*(hmap->find("codercat"))<<endl;
+    cout<<"remove"<<endl;
+    hmap->remove("codercat");
+    cout<<"find:"<<*(hmap->find("codercat"))<<endl;
     cout<<"contrainsKey:"<<hmap->contrainsKey("codercat")<<endl;
     cout<<"size:"<<hmap->getSize()<<endl;
 }

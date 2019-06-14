@@ -17,7 +17,7 @@ inclde中存放的是算法实现的头文件,demo中是对每个算法的使用
 |[Linked List Queue](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_queue.h)| Y |
 |[Linked List Stack](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_stack.h)| Y |
 |[Binary Search Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/binary_search_tree.h)| Y |
-|[AVL Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/avl_tree.h)| Y |
+|[AVL Tree Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/avl_tree_map.h)| Y |
 |[Red Black Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/red_black_tree.h)| Y |
 |[Segment Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/segment_tree.h)| Y |
 |[Trie Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/trie_tree.h)| Y |
