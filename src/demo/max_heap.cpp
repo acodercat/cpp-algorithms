@@ -7,12 +7,18 @@
 using namespace std;
 
 int main() {
-    MaxHeap<int> *maxHeap = new MaxHeap<int>(10);
-    maxHeap->insert(100);
-    maxHeap->insert(2);
-    maxHeap->insert(3);
-    maxHeap->insert(31);
-    cout<<"getMax:"<<maxHeap->getMax()<<endl;
-    cout<<"extract:"<<maxHeap->extract()<<endl;
-    cout<<"extract:"<<maxHeap->extract()<<endl;
+    MaxHeap<int> *maxHeap1 = new MaxHeap<int>(10);
+    maxHeap1->insert(100);
+    maxHeap1->insert(2);
+    maxHeap1->insert(3);
+    maxHeap1->insert(31);
+    cout<<"getMax:"<<maxHeap1->getMax()<<endl;
+    cout<<"extractMax:"<<maxHeap1->extractMax()<<endl;
+    cout<<"extractMax:"<<maxHeap1->extractMax()<<endl;
+
+    int arr[] = {11, 23, 1, 2, 3};
+    MaxHeap<int> *maxHeap2 = new MaxHeap<int>(arr, 10, sizeof(arr) / sizeof(int));
+    cout<<"heapify: {11, 23, 1, 2, 3}"<<endl;
+    cout<<"getMax:"<<maxHeap2->getMax()<<endl;
+    cout<<"extractMax:"<<maxHeap2->extractMax()<<endl;
 }

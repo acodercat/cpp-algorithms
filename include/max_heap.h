@@ -9,10 +9,10 @@
 #include <assert.h>
 using namespace std;
 
-template<typename T>
+template<typename E>
 class MaxHeap {
 private:
-    T *container = NULL;
+    E *container = NULL;
     unsigned int capacity = 0;
     unsigned int size = 0;
 
@@ -32,6 +32,10 @@ private:
         return parentIndex;
     }
 
+    unsigned getLastParentIndex() {
+        return this->getParentIndex(this->getSize() - 1);
+    }
+
     void shiftUp(unsigned index) {
 
         while ((index > 0) && this->container[index] > this->container[this->getParentIndex(index)]) {
@@ -42,9 +46,9 @@ private:
     }
 
     void shiftDown(unsigned index = 0) {
-        T e = this->container[index];
+        E e = this->container[index];
         while(this->getSize() > getLeftChildIndex(index)) {
-            T maxChildIndex = this->container[getLeftChildIndex(index)];
+            E maxChildIndex = getLeftChildIndex(index);
             if (this->getSize() > this->container[getRightChildIndex(index)]) {
                 if (this->container[getRightChildIndex(index)] > this->container[getLeftChildIndex(index)]) {
                     maxChildIndex = getRightChildIndex(index);
@@ -61,32 +65,51 @@ private:
 
 public:
     MaxHeap(unsigned capacity) {
-        this->container = new T[capacity];
+        this->container = new E[capacity];
         this->capacity = capacity;
     }
 
-    void insert(T element) {
+    // heapify
+    MaxHeap(E *arr, unsigned capacity, unsigned size) {
+        assert(capacity >= size);
+        this->container = arr;
+        this->capacity = capacity;
+        this->size = size;
+        for (int i = this->getLastParentIndex(); i >= 0; i --) {
+            this->shiftDown(i);
+        }
+
+    }
+
+    void insert(E element) {
         assert(!this->isFull());
         this->container[this->size] = element;
         this->shiftUp(this->size);
         this->size ++;
     }
 
-    T extract() {
+    E extractMax() {
         assert(!this->isEmpty());
-        T max = this->getMax();
-        T tail = this->container[this->getSize() - 1];
+        E max = this->getMax();
+        E tail = this->container[this->getSize() - 1];
         this->setMax(tail);
         this->shiftDown();
         this->size --;
         return max;
     }
 
-    T getMax() {
+    E replace(E e) {
+        E max = this->getMax();
+        this->setMax(max);
+        shiftDown();
+        return max;
+    }
+
+    E getMax() {
         return this->container[0];
     }
 
-    void setMax(T element) {
+    void setMax(E element) {
         this->container[0] = element;
     }
 
