@@ -41,21 +41,26 @@ public:
 
     optional<V> find(K k) {
         unsigned index = this->hash(k);
-        assert(index < this->M);
+        if (index > this->M) {
+            return optional<V>();
+        }
         return this->hashtable[index].find(k);
     }
 
     bool contrainsKey(K k) {
         unsigned index = this->hash(k);
-        if (this->hashtable[index].contrainsKey(k)) {
-            return false;
+        if ((index < this->M) && this->hashtable[index].contrainsKey(k)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
-    bool remove(K k) {
+    void remove(K k) {
         unsigned index = this->hash(k);
-        this->hashtable[index].remove(k);
+        if ((index < this->M) && this->hashtable[index].contrainsKey(k)) {
+            this->hashtable[index].remove(k);
+            this->size --;
+        }
     }
 
     bool isEmpty() {

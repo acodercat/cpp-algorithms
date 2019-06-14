@@ -6,7 +6,6 @@
 #ifndef ALGORITHM_CIRCULARQUEUE_H
 #define ALGORITHM_CIRCULARQUEUE_H
 
-#include <stdlib.h>
 #include <cstring>
 #include <assert.h>
 
@@ -29,8 +28,7 @@ public:
         this->capacity = capacity;
         this->frontIndex = 0;
         this->tailIndex = 0;
-        this->container = (T *)malloc(capacity * sizeof(T));
-        memset(this->container, 0, capacity * sizeof(T));
+        this->container = new T[capacity];
     }
 
     void enqueue(T v) {
