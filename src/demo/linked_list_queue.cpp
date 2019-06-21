@@ -6,7 +6,7 @@
 #include "linked_list_queue.h"
 
 int main() {
-    LinkedListQueue *linkedListQueue = new LinkedListQueue();
+    LinkedListQueue<int> *linkedListQueue = new LinkedListQueue<int>();
     linkedListQueue->enqueue(5);
     linkedListQueue->enqueue(6);
     linkedListQueue->enqueue(7);

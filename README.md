@@ -26,4 +26,5 @@ inclde中存放的是算法实现的头文件,demo中是对每个算法的使用
 |[Union Find](https://github.com/acodercat/cpp-algorithms/blob/master/include/union_find.h)| Y |
 |[Hash Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/hash_map.h)| Y |
 |[Linked List Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_map.h)| Y |
+|[Dense Weighted Graph](https://github.com/acodercat/cpp-algorithms/blob/master/include/dense_weighted_graph.h)| Y |
 |[Kd Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/kd_tree.h)| N |

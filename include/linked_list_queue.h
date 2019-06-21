@@ -9,10 +9,11 @@
 #include <assert.h>
 using namespace std;
 
+template<typename E>
 class LinkedListQueue {
 private:
     typedef struct Node {
-        int element;
+        E element;
         Node *next = NULL;
     } Node;
 
@@ -27,7 +28,7 @@ public:
         this->size = 0;
     }
 
-    void enqueue (int element) {
+    void enqueue (E element) {
         Node *node = new Node;
         node->element = element;
         if (NULL == this->head) {
@@ -40,10 +41,10 @@ public:
         this->size ++;
     }
 
-    int dequeue () {
+    E dequeue () {
         assert(!this->isEmpty());
         Node *head = this->head;
-        int element = head->element;
+        E element = head->element;
         if (head == this->tail) {
             this->head = NULL;
             this->tail = NULL;
@@ -62,6 +63,11 @@ public:
 
     bool isEmpty() {
         return 0 == this->getSize();
+    }
+
+
+    E getFront() {
+        return this->head->element;
     }
 
     string toString() {

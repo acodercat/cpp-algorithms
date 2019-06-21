@@ -8,40 +8,45 @@
 #include <cstring>
 #include <assert.h>
 
+template<typename E>
 class LinkedListStack {
 
 private:
     typedef struct Node {
-        int element;
+        E element;
         Node *next;
     } Node;
 
-    Node *top = NULL;
+    Node *topNode = NULL;
     unsigned int size = 0;
 public:
     LinkedListStack() {
-        this->top = NULL;
+        this->topNode = NULL;
         this->size = 0;
     }
 
-    void push(int element) {
+    void push(E element) {
         Node *newNode = new Node;
         newNode->element = element;
-        newNode->next = this->top;
-        this->top = newNode;
+        newNode->next = this->topNode;
+        this->topNode = newNode;
         this->size ++;
 
     }
 
-    int pop() {
+    void pop() {
         assert(!this->isEmpty());
-        Node *top = this->top;
-        int element = this->top->element;
-        this->top = top->next;
-        delete top;
+        Node *topNode = this->topNode;
+        this->topNode = topNode->next;
+        delete topNode;
         this->size --;
-        return element;
     }
+
+    E top() {
+        assert(!this->isEmpty());
+        return this->topNode->element;
+    }
+
 
     bool isEmpty() {
         return this->getSize() == 0;

@@ -6,13 +6,12 @@
 #include "linked_list_stack.h"
 
 int main() {
-    LinkedListStack *stack = new LinkedListStack();
+    LinkedListStack<int> *stack = new LinkedListStack<int>();
     stack->push(6);
     stack->push(7);
     stack->push(8);
     stack->push(9);
-    std::cout << stack->pop() << std::endl;
-    std::cout << stack->pop() << std::endl;
-    std::cout << stack->pop() << std::endl;
-    std::cout << stack->pop() << std::endl;
+    stack->pop();
+    stack->pop();
+    std::cout << stack->top() << std::endl;
 }

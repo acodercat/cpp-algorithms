@@ -128,7 +128,7 @@ public:
     }
 
     ~MaxHeap() {
-        free(this->container);
+        delete(this->container);
     }
 
 };
