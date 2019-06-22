@@ -92,6 +92,7 @@ public:
     void dfs() {
         LinkedListStack<unsigned> linkedListStack = LinkedListStack<unsigned>();
         unsigned connectedComponen = 0;
+        vector<int> id = vector<int>(vertexNum, -1);
         vector<bool> visited = vector<bool>(this->getVertexNum(), false);
         for (unsigned vertex = 0; vertex < this->getVertexNum(); vertex++) {
             if (visited[vertex]) {
@@ -101,13 +102,13 @@ public:
             visited[vertex] = true;
             while (!linkedListStack.isEmpty()) {
                 typename DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, linkedListStack.top());
+                id[linkedListStack.top()] = connectedComponen;
                 linkedListStack.pop();
                 for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
-                    if (visited[otherVertex]) {
-                        continue;
+                    if (!visited[otherVertex]) {
+                        visited[otherVertex] = true;
+                        linkedListStack.push(otherVertex);
                     }
-                    linkedListStack.push(otherVertex);
-                    visited[otherVertex] = true;
                 }
             }
             connectedComponen++;
@@ -115,9 +116,22 @@ public:
         cout<<connectedComponen<<endl;
     }
 
+    void prim() {
+        for (unsigned vertex = 0; vertex < this->getVertexNum(); vertex++) {
+            DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, vertex);
+            for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
+
+            }
+
+        }
+    }
+
+
     void bfs() {
         LinkedListQueue<unsigned> linkedListQueue = LinkedListQueue<unsigned>();
         unsigned connectedComponen = 0;
+        vector<int> id = vector<int>(vertexNum, -1);
+        vector<int> from = vector<int>(vertexNum, -1);
         vector<bool> visited = vector<bool>(this->getVertexNum(), false);
         for (unsigned vertex = 0; vertex < this->getVertexNum(); vertex++) {
             if (visited[vertex]) {
@@ -126,25 +140,34 @@ public:
             linkedListQueue.enqueue(vertex);
             visited[vertex] = true;
             while (!linkedListQueue.isEmpty()) {
-                DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, linkedListQueue.getFront());
+                unsigned front = linkedListQueue.getFront();
+                DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, front);
+                id[front] = connectedComponen;
                 linkedListQueue.dequeue();
                 for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
-                    if (visited[otherVertex]) {
-                        continue;
+                    if (!visited[otherVertex]) {
+                        from[otherVertex] = front;
+                        visited[otherVertex] = true;
+                        linkedListQueue.enqueue(otherVertex);
                     }
-                    linkedListQueue.enqueue(otherVertex);
-                    visited[otherVertex] = true;
                 }
             }
             connectedComponen++;
         }
+
         cout<<connectedComponen<<endl;
+        for (unsigned a = from[4]; a != -1; a = from[a]) {
+            cout<<a<<endl;
+        }
+
     }
 
-
-    bool isConnected(unsigned a, unsigned b) {
-
-    }
+//
+//    bool isConnected(unsigned a, unsigned b) {
+//        assert(a < this->vertexNum);
+//        assert(b < this->vertexNum);
+//        return this->id[a] == this->id[b];
+//    }
 
 
 };
