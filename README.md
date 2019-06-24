@@ -12,7 +12,7 @@ inclde中存放的是算法实现的头文件,demo中是对每个算法的使用
 |------|------|
 |[Linked List](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list.h)| Y |
 |[Circular Queue](https://github.com/acodercat/cpp-algorithms/blob/master/include/circular_queue.h)| Y |
-|[Max Heap](https://github.com/acodercat/cpp-algorithms/blob/master/include/max_heap.h)| Y |
+|[Binary Heap](https://github.com/acodercat/cpp-algorithms/blob/master/include/binary_heap.h)| Y |
 |[Priority Queue](https://github.com/acodercat/cpp-algorithms/blob/master/include/priority_queue.h)| Y |
 |[Stack](https://github.com/acodercat/cpp-algorithms/blob/master/include/stack.h)| Y |
 |[Circular Linked List](https://github.com/acodercat/cpp-algorithms/blob/master/include/circular_linked_list.h)| Y |
