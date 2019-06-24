@@ -8,8 +8,9 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
-#include <linked_list_stack.h>
-#include <linked_list_queue.h>
+#include "linked_list_stack.h"
+#include "linked_list_queue.h"
+#include "binary_heap.h"
 using namespace std;
 
 class DenseWeightedGraph {
@@ -116,11 +117,24 @@ public:
         cout<<connectedComponen<<endl;
     }
 
+    static bool binaryHeapCompare(double a, double b) {
+        return a < b;
+    }
+
     void prim() {
+        BinaryHeap<double> minHeap = BinaryHeap<double>(this->getVertexNum(), this->binaryHeapCompare);
+        LinkedListQueue<unsigned> linkedListQueue = LinkedListQueue<unsigned>();
         for (unsigned vertex = 0; vertex < this->getVertexNum(); vertex++) {
             DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, vertex);
-            for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
+            linkedListQueue.enqueue(vertex);
+            while (!linkedListQueue.isEmpty()) {
+                for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
+                    minHeap.insert(this->adj[vertex][otherVertex]);
+                }
+            }
 
+            if (!minHeap.isEmpty()) {
+                minHeap.extract();
             }
 
         }

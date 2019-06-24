@@ -2,20 +2,20 @@
 // Created by codercat on 19-6-14.
 //
 
-#ifndef CPP_ALGORITHMS_MAX_HEAP_H
-#define CPP_ALGORITHMS_MAX_HEAP_H
+#ifndef CPP_ALGORITHMS_BINARY_HEAP_H
+#define CPP_ALGORITHMS_BINARY_HEAP_H
 
 #include <math.h>
 #include <assert.h>
 using namespace std;
 
 template<typename E>
-class MaxHeap {
+class BinaryHeap {
 private:
     E *container = NULL;
     unsigned int capacity = 0;
     unsigned int size = 0;
-
+    bool (*compare)(E a, E b);
     unsigned getLeftChildIndex(unsigned index) {
         return index * 2 + 1;
     }
@@ -38,49 +38,63 @@ private:
 
     void shiftUp(unsigned index) {
 
-        while ((index > 0) && this->container[index] > this->container[this->getParentIndex(index)]) {
+        while ((index > 0) && this->compare(this->container[index], this->container[this->getParentIndex(index)])) {
             swap(this->container[index], this->container[this->getParentIndex(index)]);
             index = this->getParentIndex(index);
         }
 
     }
 
+    static bool defaultCompare(E a, E b) {
+        return a > b;
+    }
+
     void shiftDown(unsigned index = 0) {
         E e = this->container[index];
         while(this->getSize() > getLeftChildIndex(index)) {
-            E maxChildIndex = getLeftChildIndex(index);
+            unsigned maxOrMinChildIndex = getLeftChildIndex(index);
             if (this->getSize() > this->container[getRightChildIndex(index)]) {
-                if (this->container[getRightChildIndex(index)] > this->container[getLeftChildIndex(index)]) {
-                    maxChildIndex = getRightChildIndex(index);
+                if (this->compare(this->container[getRightChildIndex(index)], this->container[getLeftChildIndex(index)])) {
+                    maxOrMinChildIndex = getRightChildIndex(index);
                 }
             }
-            if (e >= this->container[maxChildIndex]) {
+            if (this->compare(e, this->container[maxOrMinChildIndex]) || e == this->container[maxOrMinChildIndex]) {
                 break;
             }
-            this->container[index] = this->container[maxChildIndex];
-            index = maxChildIndex;
+            this->container[index] = this->container[maxOrMinChildIndex];
+            index = maxOrMinChildIndex;
         }
         this->container[index] = e;
     }
 
 public:
-    MaxHeap(unsigned capacity) {
+
+    BinaryHeap(unsigned capacity, bool (*compare)(E a, E b) = NULL) {
         assert(capacity > 0);
         this->container = new E[capacity];
         this->capacity = capacity;
+        if (NULL == compare) {
+            this->compare = this->defaultCompare;
+        } else {
+            this->compare = compare;
+        }
     }
 
     // heapify
-    MaxHeap(E *arr, unsigned capacity, unsigned size) {
+    BinaryHeap(E *arr, unsigned capacity, unsigned size, bool (*compare)(E a, E b) = NULL) {
         assert(capacity >= size);
         assert(capacity > 0);
         this->container = arr;
         this->capacity = capacity;
         this->size = size;
+        if (NULL == compare) {
+            this->compare = this->defaultCompare;
+        } else {
+            this->compare = compare;
+        }
         for (int i = this->getLastParentIndex(); i >= 0; i --) {
             this->shiftDown(i);
         }
-
     }
 
     void insert(E element) {
@@ -90,28 +104,28 @@ public:
         this->size ++;
     }
 
-    E extractMax() {
+    E extract() {
         assert(!this->isEmpty());
-        E max = this->getMax();
+        E root = this->getRoot();
         E tail = this->container[this->getSize() - 1];
-        this->setMax(tail);
+        this->setRoot(tail);
         this->shiftDown();
         this->size --;
-        return max;
+        return root;
     }
 
     E replace(E e) {
-        E max = this->getMax();
-        this->setMax(max);
+        E root = this->getRoot();
+        this->setRoot(root);
         shiftDown();
-        return max;
+        return root;
     }
 
-    E getMax() {
+    E getRoot() {
         return this->container[0];
     }
 
-    void setMax(E element) {
+    void setRoot(E element) {
         this->container[0] = element;
     }
 
@@ -127,10 +141,10 @@ public:
         return this->size >= this->capacity;
     }
 
-    ~MaxHeap() {
+    ~BinaryHeap() {
         delete(this->container);
     }
 
 };
 
-#endif //CPP_ALGORITHMS_MAX_HEAP_H
+#endif //CPP_ALGORITHMS_BINARY_HEAP_H

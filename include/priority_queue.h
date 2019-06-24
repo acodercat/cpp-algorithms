@@ -5,17 +5,17 @@
 #ifndef CPP_ALGORITHMS_PRIORITY_QUEUE_H
 #define CPP_ALGORITHMS_PRIORITY_QUEUE_H
 
-#include "max_heap.h"
+#include "binary_heap.h"
 
 template<typename E>
 class PriorityQueue {
 private:
-    MaxHeap<E> *maxHeap;
+    BinaryHeap<E> *maxHeap;
 
 public:
     PriorityQueue(unsigned capacity) {
         assert(capacity > 0);
-        this->maxHeap = new MaxHeap<E>(capacity);
+        this->maxHeap = new BinaryHeap<E>(capacity);
     }
 
     void enqueue(E e) {
@@ -23,7 +23,7 @@ public:
     }
 
     E dequeue() {
-        return maxHeap->extractMax();
+        return maxHeap->extract();
     }
 
     bool isEmpty() {
@@ -35,7 +35,7 @@ public:
     }
 
     E getFront() {
-        return maxHeap->getMax();
+        return maxHeap->getRoot();
     }
 
     unsigned int getSize() {
