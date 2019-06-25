@@ -53,7 +53,7 @@ private:
         E e = this->container[index];
         while(this->getSize() > getLeftChildIndex(index)) {
             unsigned maxOrMinChildIndex = getLeftChildIndex(index);
-            if (this->getSize() > this->container[getRightChildIndex(index)]) {
+            if (this->getSize() > getRightChildIndex(index)) {
                 if (this->compare(this->container[getRightChildIndex(index)], this->container[getLeftChildIndex(index)])) {
                     maxOrMinChildIndex = getRightChildIndex(index);
                 }

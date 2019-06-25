@@ -13,12 +13,61 @@
 #include "binary_heap.h"
 using namespace std;
 
+typedef double Weight;
+
 class DenseWeightedGraph {
 private:
     bool directed;
-    vector<vector<double>> adj;
+    vector<vector<Weight>> adj;
     unsigned vertexNum;
     unsigned edgeNum;
+
+    struct Edge {
+        Weight weight;
+        unsigned a;
+        unsigned b;
+
+        Edge (unsigned vertex, unsigned otherVertex, Weight weight) {
+            this->a = vertex;
+            this->b = otherVertex;
+            this->weight = weight;
+        }
+
+        Edge () {}
+
+        unsigned getV() {
+            return this->a;
+        }
+
+        unsigned getW() {
+            return this->b;
+        }
+
+        Weight getWeight() {
+            return this->weight;
+        }
+
+        bool operator<(Edge& otherEdge){
+            return this->weight < otherEdge.getWeight();
+        }
+
+        bool operator<=(Edge& otherEdge){
+            return this->weight <= otherEdge.getWeight();
+        }
+
+        bool operator>(Edge& otherEdge){
+            return this->weight > otherEdge.getWeight();
+        }
+
+        bool operator>=(Edge& otherEdge){
+            return this->weight >= otherEdge.getWeight();
+        }
+
+        bool operator==(Edge& otherEdge){
+            return weight == otherEdge.getWeight();
+        }
+
+    };
 
 public:
     class AdjacentIterator {
@@ -54,7 +103,7 @@ public:
     };
 
     DenseWeightedGraph(unsigned vertexNum, bool directed = false) {
-        this->adj = vector<vector<double>>(vertexNum, vector<double>(vertexNum, 0));
+        this->adj = vector<vector<Weight>>(vertexNum, vector<Weight>(vertexNum, 0));
         this->vertexNum = vertexNum;
         this->edgeNum = 0;
         this->directed = directed;
@@ -69,7 +118,7 @@ public:
         return true;
     }
 
-    void addEdge(unsigned a, unsigned b, double w) {
+    void addEdge(unsigned a, unsigned b, Weight w) {
         assert(a < this->vertexNum);
         assert(b < this->vertexNum);
         if (this->hasEdge(a, b)) {
@@ -88,6 +137,42 @@ public:
 
     unsigned getVertexNum() {
         return this->vertexNum;
+    }
+
+    static bool binaryHeapCompare(Edge a, Edge b) {
+        return a < b;
+    }
+
+    void prim() {
+        BinaryHeap<Edge> minHeap = BinaryHeap<Edge>(this->getVertexNum(), this->binaryHeapCompare);
+        LinkedListQueue<unsigned> queue = LinkedListQueue<unsigned>();
+        vector<bool> visited = vector<bool>(this->getVertexNum(), false);
+        queue.enqueue(0);
+        while (!queue.isEmpty()) {
+            unsigned vertex = queue.dequeue();
+            if (visited[vertex]) {
+                continue;
+            }
+            DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, vertex);
+            visited[vertex] = true;
+            for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
+                if (!visited[otherVertex]) {
+                    minHeap.insert(Edge(vertex, otherVertex, this->adj[vertex][otherVertex]));
+                }
+            }
+            if (!minHeap.isEmpty()) {
+                Edge edge = minHeap.extract();
+                if (visited[edge.getV()] && visited[edge.getW()]) {
+                    continue;
+                }
+
+                if (!visited[edge.getV()]) {
+                    queue.enqueue(edge.getV());
+                } else {
+                    queue.enqueue(edge.getW());
+                }
+            }
+        }
     }
 
     void dfs() {
@@ -116,30 +201,6 @@ public:
         }
         cout<<connectedComponen<<endl;
     }
-
-    static bool binaryHeapCompare(double a, double b) {
-        return a < b;
-    }
-
-    void prim() {
-        BinaryHeap<double> minHeap = BinaryHeap<double>(this->getVertexNum(), this->binaryHeapCompare);
-        LinkedListQueue<unsigned> linkedListQueue = LinkedListQueue<unsigned>();
-        for (unsigned vertex = 0; vertex < this->getVertexNum(); vertex++) {
-            DenseWeightedGraph::AdjacentIterator iter = DenseWeightedGraph::AdjacentIterator(this, vertex);
-            linkedListQueue.enqueue(vertex);
-            while (!linkedListQueue.isEmpty()) {
-                for (unsigned otherVertex = iter.begin(); !iter.end(); otherVertex = iter.next()) {
-                    minHeap.insert(this->adj[vertex][otherVertex]);
-                }
-            }
-
-            if (!minHeap.isEmpty()) {
-                minHeap.extract();
-            }
-
-        }
-    }
-
 
     void bfs() {
         LinkedListQueue<unsigned> linkedListQueue = LinkedListQueue<unsigned>();
