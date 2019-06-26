@@ -24,8 +24,9 @@ private:
         return this->getLeftChildIndex(index) + 1;
     }
 
+
     unsigned getParentIndex(unsigned index) {
-        int parentIndex = floor(index / 2) - 1;
+        int parentIndex = ceil((double)index / 2) - 1;
         if (parentIndex < 0) {
             return 0;
         }
@@ -65,6 +66,10 @@ private:
             index = maxOrMinChildIndex;
         }
         this->container[index] = e;
+    }
+
+    void setRoot(E element) {
+        this->container[0] = element;
     }
 
 public:
@@ -114,19 +119,15 @@ public:
         return root;
     }
 
-    E replace(E e) {
+    E replace(E element) {
         E root = this->getRoot();
-        this->setRoot(root);
+        this->setRoot(element);
         shiftDown();
         return root;
     }
 
     E getRoot() {
         return this->container[0];
-    }
-
-    void setRoot(E element) {
-        this->container[0] = element;
     }
 
     bool isEmpty() {
