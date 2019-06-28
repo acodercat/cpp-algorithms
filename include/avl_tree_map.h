@@ -36,6 +36,8 @@ private:
                 rootNode->leftNode = this->insert(rootNode->leftNode, k, v);
             } else if (k > rootNode->k) {
                 rootNode->rightNode = this->insert(rootNode->rightNode, k, v);
+            } else {
+                rootNode->v = v;
             }
         }
         rootNode->height = max(this->getNodeHeight(rootNode->leftNode), this->getNodeHeight(rootNode->rightNode)) + 1;
