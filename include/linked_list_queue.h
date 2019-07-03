@@ -29,15 +29,14 @@ public:
     }
 
     void enqueue (E element) {
-        Node *node = new Node;
-        node->element = element;
-        if (NULL == this->head) {
-            this->head = node;
-            this->tail = this->head;
+        Node *newNode = new Node;
+        newNode->element = element;
+        if (this->isEmpty()) {
+            this->head = newNode;
         } else {
-            this->tail->next = node;
-            this->tail = node;
+            this->tail->next = newNode;
         }
+        this->tail = newNode;
         this->size ++;
     }
 
@@ -64,7 +63,6 @@ public:
     bool isEmpty() {
         return 0 == this->getSize();
     }
-
 
     E getFront() {
         return this->head->element;

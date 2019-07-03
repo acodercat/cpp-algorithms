@@ -26,7 +26,8 @@ private:
 
 
     unsigned getParentIndex(unsigned index) {
-        int parentIndex = ceil((double)index / 2) - 1;
+//        int parentIndex = ceil((double)index / 2) - 1;
+        int parentIndex = floor((double)(index - 1) / 2);
         if (parentIndex < 0) {
             return 0;
         }
