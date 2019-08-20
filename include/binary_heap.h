@@ -24,7 +24,6 @@ private:
         return this->getLeftChildIndex(index) + 1;
     }
 
-
     unsigned getParentIndex(unsigned index) {
 //        int parentIndex = ceil((double)index / 2) - 1;
         int parentIndex = floor((double)(index - 1) / 2);
@@ -44,7 +43,6 @@ private:
             swap(this->container[index], this->container[this->getParentIndex(index)]);
             index = this->getParentIndex(index);
         }
-
     }
 
     static bool defaultCompare(E a, E b) {
@@ -105,7 +103,7 @@ public:
 
     void insert(E element) {
         assert(!this->isFull());
-        this->container[this->size] = element;
+        this->container[this->getSize()] = element;
         this->shiftUp(this->size);
         this->size ++;
     }

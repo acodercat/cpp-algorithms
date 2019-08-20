@@ -29,4 +29,5 @@ int main() {
     cout<<"extract:"<<minHeap->extract()<<endl;
     cout<<"extract:"<<minHeap->extract()<<endl;
     cout<<"extract:"<<minHeap->extract()<<endl;
+
 }

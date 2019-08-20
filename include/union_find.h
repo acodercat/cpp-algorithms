@@ -72,6 +72,11 @@ public:
         }
     }
 
+    ~UnionFind() {
+        delete this->parents;
+        delete this->ranks;
+    }
+
 };
 
 
