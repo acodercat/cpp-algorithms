@@ -54,6 +54,8 @@ public:
     void unionElement(int p, int q) {
         int pRoot = this->find(p);
         int qRoot = this->find(q);
+
+        // 如果两个元素的根节点相同，则代表它们属于同一个集合，就不再需要合并
         if ( pRoot == qRoot ) {
             return;
         }
@@ -70,6 +72,7 @@ public:
             this->parents[pRoot] = qRoot;
             this->ranks[qRoot] ++;
         }
+        this->size --;
     }
 
     ~UnionFind() {
