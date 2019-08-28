@@ -9,7 +9,7 @@ class UnionFind {
 private:
     unsigned int size = 0;
     int *parents;
-    // 记录每个根节点所在树的深度
+    // 记录每个节点所在树的深度
     int *ranks;
 
 public:
