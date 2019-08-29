@@ -7,17 +7,22 @@
 
 class UnionFind {
 private:
-    unsigned int size = 0;
+    // 元素个数
+    unsigned int elementNum = 0;
+    // 联通分量
+    unsigned int connectedComponent = 0;
     int *parents;
     // 记录每个节点所在树的深度
     int *ranks;
 
 public:
-    UnionFind(unsigned int size) {
-        this->size = size;
-        this->parents = new int[size];
-        this->ranks = new int[size];
-        for ( int i = 0; i < size; i ++ ) {
+    UnionFind(unsigned int elementNum) {
+        this->elementNum = elementNum;
+        // 初始情况下联通分量为元素个数
+        this->connectedComponent = elementNum;
+        this->parents = new int[elementNum];
+        this->ranks = new int[elementNum];
+        for ( int i = 0; i < elementNum; i ++ ) {
             this->parents[i] = i;
             this->ranks[i] = 1;
         }
@@ -47,8 +52,12 @@ public:
         return this->find(p) == this->find(q);
     }
 
-    unsigned int getSize() {
-        return this->size;
+    unsigned int getElementNum() {
+        return this->elementNum;
+    }
+
+    unsigned int getConnectedComponent() {
+        return this->connectedComponent;
     }
 
     void unionElement(int p, int q) {
@@ -72,7 +81,8 @@ public:
             this->parents[pRoot] = qRoot;
             this->ranks[qRoot] ++;
         }
-        this->size --;
+
+        this->connectedComponent --;
     }
 
     ~UnionFind() {
