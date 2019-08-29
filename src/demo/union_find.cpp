@@ -14,5 +14,4 @@ int main() {
     unionFind->unionElement(3, 4);
     cout<<unionFind->find(4)<<endl;
     cout<<unionFind->isConnected(4, 2)<<endl;
-
 }
