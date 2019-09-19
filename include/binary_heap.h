@@ -104,7 +104,7 @@ public:
     void insert(E element) {
         assert(!this->isFull());
         this->container[this->getSize()] = element;
-        this->shiftUp(this->size);
+        this->shiftUp(this->getSize());
         this->size ++;
     }
 
