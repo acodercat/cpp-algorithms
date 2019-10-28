@@ -21,7 +21,7 @@ private:
     }
 
     unsigned calculateRightChildIndex(unsigned index) {
-        return this->getLeftChildIndex(index) + 1;
+        return this->calculateLeftChildIndex(index) + 1;
     }
 
     unsigned calculateParentIndex(unsigned index) {
@@ -34,14 +34,14 @@ private:
     }
 
     unsigned calculateLastParentIndex() {
-        return this->getParentIndex(this->getSize() - 1);
+        return this->calculateParentIndex(this->getSize() - 1);
     }
 
     void shiftUp(unsigned index) {
 
         while ((index > 0) && this->compare(this->container[index], this->container[this->calculateParentIndex(index)])) {
-            swap(this->container[index], this->container[this->getParentIndex(index)]);
-            index = this->getParentIndex(index);
+            swap(this->container[index], this->container[this->calculateParentIndex(index)]);
+            index = this->calculateParentIndex(index);
         }
     }
 
