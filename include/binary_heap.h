@@ -16,15 +16,15 @@ private:
     unsigned int capacity = 0;
     unsigned int size = 0;
     bool (*compare)(E a, E b);
-    unsigned getLeftChildIndex(unsigned index) {
+    unsigned calculateLeftChildIndex(unsigned index) {
         return index * 2 + 1;
     }
 
-    unsigned getRightChildIndex(unsigned index) {
+    unsigned calculateRightChildIndex(unsigned index) {
         return this->getLeftChildIndex(index) + 1;
     }
 
-    unsigned getParentIndex(unsigned index) {
+    unsigned calculateParentIndex(unsigned index) {
 //        int parentIndex = ceil((double)index / 2) - 1;
         int parentIndex = floor((double)(index - 1) / 2);
         if (parentIndex < 0) {
@@ -33,13 +33,13 @@ private:
         return parentIndex;
     }
 
-    unsigned getLastParentIndex() {
+    unsigned calculateLastParentIndex() {
         return this->getParentIndex(this->getSize() - 1);
     }
 
     void shiftUp(unsigned index) {
 
-        while ((index > 0) && this->compare(this->container[index], this->container[this->getParentIndex(index)])) {
+        while ((index > 0) && this->compare(this->container[index], this->container[this->calculateParentIndex(index)])) {
             swap(this->container[index], this->container[this->getParentIndex(index)]);
             index = this->getParentIndex(index);
         }
@@ -51,11 +51,11 @@ private:
 
     void shiftDown(unsigned index = 0) {
         E e = this->container[index];
-        while(this->getSize() > getLeftChildIndex(index)) {
-            unsigned maxOrMinChildIndex = getLeftChildIndex(index);
-            if (this->getSize() > getRightChildIndex(index)) {
-                if (this->compare(this->container[getRightChildIndex(index)], this->container[getLeftChildIndex(index)])) {
-                    maxOrMinChildIndex = getRightChildIndex(index);
+        while(this->getSize() > calculateLeftChildIndex(index)) {
+            unsigned maxOrMinChildIndex = calculateLeftChildIndex(index);
+            if (this->getSize() > calculateRightChildIndex(index)) {
+                if (this->compare(this->container[calculateRightChildIndex(index)], this->container[calculateLeftChildIndex(index)])) {
+                    maxOrMinChildIndex = calculateRightChildIndex(index);
                 }
             }
             if (this->compare(e, this->container[maxOrMinChildIndex]) || e == this->container[maxOrMinChildIndex]) {
@@ -96,7 +96,7 @@ public:
         } else {
             this->compare = compare;
         }
-        for (int i = this->getLastParentIndex(); i >= 0; i --) {
+        for (int i = this->calculateLastParentIndex(); i >= 0; i --) {
             this->shiftDown(i);
         }
     }
