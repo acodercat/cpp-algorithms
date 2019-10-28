@@ -38,10 +38,12 @@ private:
     }
 
     void shiftUp(unsigned index) {
-
-        while ((index > 0) && this->compare(this->container[index], this->container[this->calculateParentIndex(index)])) {
-            swap(this->container[index], this->container[this->calculateParentIndex(index)]);
-            index = this->calculateParentIndex(index);
+        unsigned currentIndex = index;
+        unsigned parentIndexOfCurrentIndex = this->calculateParentIndex(currentIndex);
+        while ((index > 0) && this->compare(this->container[index], this->container[parentIndexOfCurrentIndex])) {
+            swap(this->container[index], this->container[parentIndexOfCurrentIndex]);
+            currentIndex = parentIndexOfCurrentIndex;
+            parentIndexOfCurrentIndex = this->calculateParentIndex(currentIndex);
         }
     }
 
