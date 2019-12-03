@@ -16,6 +16,7 @@ private:
     unsigned int capacity = 0;
     unsigned int size = 0;
     bool (*compare)(E a, E b);
+
     unsigned calculateLeftChildIndex(unsigned index) {
         return index * 2 + 1;
     }
@@ -37,11 +38,10 @@ private:
         return this->calculateParentIndex(this->getSize() - 1);
     }
 
-    void shiftUp(unsigned index) {
-        unsigned currentIndex = index;
+    void shiftUp(unsigned currentIndex) {
         unsigned parentIndexOfCurrentIndex = this->calculateParentIndex(currentIndex);
-        while ((index > 0) && this->compare(this->container[index], this->container[parentIndexOfCurrentIndex])) {
-            swap(this->container[index], this->container[parentIndexOfCurrentIndex]);
+        while ((currentIndex > 0) && this->compare(this->container[currentIndex], this->container[parentIndexOfCurrentIndex])) {
+            swap(this->container[currentIndex], this->container[parentIndexOfCurrentIndex]);
             currentIndex = parentIndexOfCurrentIndex;
             parentIndexOfCurrentIndex = this->calculateParentIndex(currentIndex);
         }
@@ -51,22 +51,25 @@ private:
         return a > b;
     }
 
-    void shiftDown(unsigned index = 0) {
-        E e = this->container[index];
-        while(this->getSize() > calculateLeftChildIndex(index)) {
-            unsigned maxOrMinChildIndex = calculateLeftChildIndex(index);
-            if (this->getSize() > calculateRightChildIndex(index)) {
-                if (this->compare(this->container[calculateRightChildIndex(index)], this->container[calculateLeftChildIndex(index)])) {
-                    maxOrMinChildIndex = calculateRightChildIndex(index);
-                }
+    void shiftDown(unsigned currentIndex = 0) {
+        E e = this->container[currentIndex];
+        unsigned leftChildIndexOfCurrent = this->calculateLeftChildIndex(currentIndex);
+        while(this->getSize() > leftChildIndexOfCurrent) {
+            unsigned foundChildIndex;
+            unsigned rightChildIndexOfCurrent = calculateRightChildIndex(currentIndex);
+            if ((this->getSize() > rightChildIndexOfCurrent) && (this->compare(this->container[rightChildIndexOfCurrent], this->container[leftChildIndexOfCurrent]))) {
+                foundChildIndex = rightChildIndexOfCurrent;
+            } else {
+                foundChildIndex = leftChildIndexOfCurrent;
             }
-            if (this->compare(e, this->container[maxOrMinChildIndex]) || e == this->container[maxOrMinChildIndex]) {
+            if (this->compare(e, this->container[foundChildIndex]) || e == this->container[foundChildIndex]) {
                 break;
             }
-            this->container[index] = this->container[maxOrMinChildIndex];
-            index = maxOrMinChildIndex;
+            this->container[currentIndex] = this->container[foundChildIndex];
+            currentIndex = foundChildIndex;
+            leftChildIndexOfCurrent = this->calculateLeftChildIndex(currentIndex);
         }
-        this->container[index] = e;
+        this->container[currentIndex] = e;
     }
 
     void setRoot(E element) {
