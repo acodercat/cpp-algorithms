@@ -6,7 +6,7 @@
 #define ALGORITHM_LINKEDLISTQUEUE_H
 
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 using namespace std;
 
 template<typename E>

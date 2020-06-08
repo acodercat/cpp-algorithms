@@ -6,7 +6,7 @@
 #define CPP_ALGORITHMS_SPARSE_GRAPH_H
 
 #include <vector>
-#include <assert.h>
+#include <cassert>
 using namespace std;
 
 template<typename G>

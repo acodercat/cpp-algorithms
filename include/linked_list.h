@@ -6,7 +6,7 @@
 #define ALGORITHM_LINKEDLIST_H
 
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 #include <string>
 
 using namespace std;

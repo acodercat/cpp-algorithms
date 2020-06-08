@@ -4,7 +4,7 @@
 
 #ifndef CPP_ALGORITHMS_RED_BLACK_TREE_H
 #define CPP_ALGORITHMS_RED_BLACK_TREE_H
-#include <assert.h>
+#include <cassert>
 #include <iostream>
 using namespace std;
 

@@ -5,7 +5,7 @@
 #ifndef CPP_ALGORITHMS_HASH_MAP_H
 #define CPP_ALGORITHMS_HASH_MAP_H
 
-#include <assert.h>
+#include <cassert>
 #include "avl_tree_map.h"
 #include <iostream>
 #include <optional>

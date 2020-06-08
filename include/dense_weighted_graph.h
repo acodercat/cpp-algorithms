@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <iostream>
-#include <assert.h>
+#include <cassert>
 #include "linked_list_stack.h"
 #include "linked_list_queue.h"
 #include "binary_heap.h"

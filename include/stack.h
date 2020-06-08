@@ -3,7 +3,7 @@
 //
 #include <malloc.h>
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 
 #ifndef ALGORITHM_STACK_H
 #define ALGORITHM_STACK_H

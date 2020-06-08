@@ -6,7 +6,7 @@
 #define CPP_ALGORITHMS_CIRCULAR_LINKED_LIST_H
 
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 
 using namespace std;
 

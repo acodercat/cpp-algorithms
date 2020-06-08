@@ -6,7 +6,7 @@
 #define ALGORITHM_LINKEDLISTSTACK_H
 
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 
 template<typename E>
 class LinkedListStack {

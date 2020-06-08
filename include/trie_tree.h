@@ -6,7 +6,7 @@
 #define CPP_ALGORITHMS_TRIE_TREE_H
 
 #include <cstring>
-#include <assert.h>
+#include <cassert>
 using namespace std;
 
 class TrieTree {

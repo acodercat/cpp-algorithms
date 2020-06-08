@@ -6,7 +6,7 @@
 #ifndef ALGORITHM_CIRCULARQUEUE_H
 #define ALGORITHM_CIRCULARQUEUE_H
 
-#include <assert.h>
+#include <cassert>
 
 template<typename E>
 class CircularQueue {
