@@ -28,3 +28,7 @@ See the [examples](https://github.com/acodercat/cpp-algorithms/tree/master/src/e
 |[Linked List Map](https://github.com/acodercat/cpp-algorithms/blob/master/include/linked_list_map.h)| Y |
 |[Dense Weighted Graph](https://github.com/acodercat/cpp-algorithms/blob/master/include/dense_weighted_graph.h)| Y |
 |[Kd Tree](https://github.com/acodercat/cpp-algorithms/blob/master/include/kd_tree.h)| N |
+
+## License
+
+[MIT](LICENSE)
