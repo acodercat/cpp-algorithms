@@ -1,12 +1,12 @@
 # C++ Algorithms
 [![Build Status](https://travis-ci.org/acodercat/cpp-algorithms.svg?branch=master)](https://travis-ci.org/acodercat/cpp-algorithms)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/acodercat/cpp-algorithms/blob/master/LICENSE)
 
-使用C++实现了基础算法与数据结构
+Common data structures and algorithms are implemented using C++.
 
-### 目录结构说明
-inclde中存放的是算法实现的头文件，examples中是对每个算法的使用样例,它们之间一一对应.
+See the [examples](https://github.com/acodercat/cpp-algorithms/tree/master/src/examples) directory for more algorithm examples.
 
-### 目录
+### Algorithms
 
 | Name | Is Completed |
 |------|------|
