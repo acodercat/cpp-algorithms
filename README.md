@@ -1,5 +1,4 @@
 # C++ Algorithms
-[![Build Status](https://travis-ci.org/acodercat/cpp-algorithms.svg?branch=master)](https://travis-ci.org/acodercat/cpp-algorithms)
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/acodercat/cpp-algorithms/blob/master/LICENSE)
 
 Common data structures and algorithms are implemented using C++.
